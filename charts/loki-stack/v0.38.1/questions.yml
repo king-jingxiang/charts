@@ -2,36 +2,38 @@ categories:
   - logging
 questions:
 # loki configuration
-- variable: loki.enable
+- variable: loki.enabled
   default: true
   description: "Enable Loki"
   type: boolean
   group: "loki"
   label: Enable Loki
+
 # promtail configuration
-- variable: promtail.enable
+- variable: promtail.enabled
   default: true
   description: "Enable Promtail To Collect Logs"
   type: boolean
   group: "promtail"
   label: Enable Promtail
+
 # fluent-bit configuration
-- variable: fluent-bit.enable
+- variable: fluent-bit.enabled
   default: false
-  description: "Enable Fluent Bit To Collect Logs"
+  description: "Enable Fluent-bit To Collect Logs"
   type: boolean
   group: "fluent-bit"
   show_if: "promtail.enable=false"
-  label: fluent-bit.enable
+  label: Enable Fluent-bit
 
 # grafana configuration
-- variable: grafana.enable
+- variable: grafana.enabled
   default: false
   description: "Enable Grafana"
   type: boolean
   group: "grafana"
   label: Enable Grafana
-- variable: grafana.image
+- variable: grafana.image.tag
   default: "6.7.0"
   description: "Grafana Image Tag"
   type: string
