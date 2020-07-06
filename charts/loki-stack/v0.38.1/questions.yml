@@ -47,6 +47,7 @@ questions:
   description: "The name of an existing secret containing the admin credentials."
   type: secret
   group: "Grafana Settings"
+  show_if: "grafana.enabled=true"
   label: Select Existing Admin Secret
 - variable: adminUser
   default: "admin"
@@ -55,26 +56,27 @@ questions:
   group: "Grafana Settings"
   label: Grafana Admin Username
   required: true
-  show_if: "admin.existingSecret="
+  show_if: "grafana.enabled=true"
 - variable: adminPassword
   default: ""
   description: "Grafana admin password"
   type: password
   group: "Grafana Settings"
   label: Grafana Admin Password
-  show_if: "admin.existingSecret="
+  show_if: "grafana.enabled=true"
 - variable: rbac.namespaced
   default: true
   description: "Creates Role and Rolebinding instead of the default ClusterRole and ClusteRoleBindings for the grafana instance."
   type: boolean
   group: "Grafana Settings"
   label: Set Grafana RBAC to Namespaced
-  show_if: "admin.existingSecret="
+  show_if: "grafana.enabled=true"
 - variable: grafana.ingress.enabled
   default: true
   description: "Expose grafana using Layer 7 Load Balancer - ingress"
   type: boolean
   label: Expose Grafana using Layer 7 Load Balancer
+  show_if: "grafana.enabled=true"
   show_subquestion_if: true
   group: "Service and Load Balancing"
   required: true
@@ -86,7 +88,7 @@ questions:
       required: true
       label: Hostname
 - variable: grafana.service.type
-  default: "NodePort"
+  default: "ClusterIP"
   description: "Grafana service type"
   type: enum
   group: "Service and Load Balancing"
@@ -95,7 +97,8 @@ questions:
     - "NodePort"
   required: true
   label: Grafana Service Type
-  show_subquestion_if: "NodePort"
+  show_if: "grafana.enabled=true"
+  show_subquestion_if: "ClusterIP"
   subquestions:
     - variable: grafana.service.nodePort
       default: ""
