@@ -107,5 +107,5 @@ questions:
       type: int
       min: 30000
       max: 32767
-      show_if: "ingress.enabled=false"
+      show_if: "grafana.ingress.enabled=false"
       label: Grafana NodePort Number
