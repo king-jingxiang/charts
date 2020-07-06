@@ -10,7 +10,7 @@ questions:
   group: "Container Images"
   subquestions:
   - variable: image_tag_version
-    default: "latest"
+    default: "v0.4.0"
     description: "Volcano Image Tag"
     type: string
     label: Image Tag
@@ -34,7 +34,7 @@ questions:
 - variable: admission_secret_name
   default: "volcano-admission-secret"
   description: "Volcano Adminssion Secret Name"
-  type: secret
+  type: string
   group: "Volcano Settings"
   label: Adminssion Secret Name
 
