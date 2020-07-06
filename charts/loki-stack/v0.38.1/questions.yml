@@ -71,12 +71,14 @@ questions:
   group: "Grafana Settings"
   label: Set Grafana RBAC to Namespaced
   show_if: "grafana.enabled=true"
+
 - variable: grafana.ingress.enabled
   default: true
   description: "Expose grafana using Layer 7 Load Balancer - ingress"
   type: boolean
   label: Expose Grafana using Layer 7 Load Balancer
   show_if: "grafana.enabled=true"
+  show_subquestion_if: true
   group: "Service and Load Balancing"
   required: true
   subquestions:
@@ -86,7 +88,6 @@ questions:
       type: hostname
       required: true
       label: Hostname
-      show_if: "grafana.enabled=true"
 - variable: grafana.service.type
   default: "ClusterIP"
   description: "Grafana service type"
@@ -97,7 +98,7 @@ questions:
     - "NodePort"
   required: true
   label: Grafana Service Type
-  show_if: "grafana.enabled=true"
+  show_subquestion_if: "NodePort"
   subquestions:
     - variable: grafana.service.nodePort
       default: ""
