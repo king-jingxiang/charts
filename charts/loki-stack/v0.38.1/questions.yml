@@ -4,40 +4,36 @@ questions:
 # loki configuration
 - variable: loki.enable
   default: true
-  description: "loki.enable"
+  description: "Enable Loki"
   type: boolean
   group: "loki"
-  label: loki.enable
+  label: Enable Loki
 # promtail configuration
 - variable: promtail.enable
   default: true
-  description: "promtail.enable"
+  description: "Enable Promtail To Collect Logs"
   type: boolean
   group: "promtail"
-  label: promtail.enable
+  label: Enable Promtail
 # fluent-bit configuration
 - variable: fluent-bit.enable
   default: false
-  description: "fluent-bit.enable"
+  description: "Enable Fluent Bit To Collect Logs"
   type: boolean
   group: "fluent-bit"
+  show_if: "promtail.enable=false"
   label: fluent-bit.enable
 # grafana configuration
 - variable: grafana.enable
   default: false
-  description: "grafana.enable"
+  description: "Enable Grafana"
   type: boolean
   group: "grafana"
-  label: grafana.enable
-- variable: grafana.sidecar.datasources.enabled
-  default: true
-  description: "grafana.sidecar.datasources.enabled"
-  type: boolean
-  group: "grafana"
-  label: grafana.sidecar.datasources.enabled
+  label: Enable Grafana
 - variable: grafana.image
   default: "6.7.0"
-  description: "grafana.image"
+  description: "Grafana Image Tag"
   type: string
   group: "grafana"
-  label: grafana.image
+  show_if: "grafana.enable=true"
+  label: Grafana Image Tag

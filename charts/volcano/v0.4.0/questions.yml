@@ -9,36 +9,36 @@ questions:
   show_subquestion_if: false
   group: "Container Images"
   subquestions:
-  - variable: image_tag_version
+  - variable: basic.image_tag_version
     default: "v0.4.0"
     description: "Volcano Image Tag"
     type: string
     label: Image Tag
-  - variable: controller_image_name
+  - variable: basic.controller_image_name
     default: "volcanosh/vc-controllers"
     description: "Volcano Controller Image Name"
     type: string
     label: Controller Image Name
-  - variable: scheduler_image_name
+  - variable: basic.scheduler_image_name
     default: "volcanosh/vc-scheduler"
     description: "Volcano Scheduler Image Name"
     type: string
     label: Scheduler Image Name
-  - variable: admission_image_name
+  - variable: basic.admission_image_name
     default: "volcanosh/vc-admission"
     description: "Volcano Admission Image Name"
     type: string
     label: Admission Image Name
 
 # volcano configurations
-- variable: admission_secret_name
+- variable: basic.admission_secret_name
   default: "volcano-admission-secret"
   description: "Volcano Adminssion Secret Name"
   type: string
   group: "Volcano Settings"
   label: Adminssion Secret Name
 
-- variable: scheduler_config_file
+- variable: basic.scheduler_config_file
   default: "volcano-scheduler.conf"
   description: "Volcano Scheduler Config File: [volcano-scheduler.conf,volcano-scheduler-ci.conf]"
   type: string
@@ -46,7 +46,7 @@ questions:
   label: Scheduler Config File
   required: true
 
-- variable: image_pull_secret
+- variable: basic.image_pull_secret
   default: ""
   description: "Volcano Image Pull Secret"
   type: string
