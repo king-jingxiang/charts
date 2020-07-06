@@ -38,9 +38,38 @@ questions:
   description: "Grafana Image Tag"
   type: string
   group: "grafana"
-  show_if: "grafana.enable=true"
+  show_if: "grafana.enabled=true"
   label: Grafana Image Tag
 
+# grafana configurations
+- variable: admin.existingSecret
+  default: ""
+  description: "The name of an existing secret containing the admin credentials."
+  type: secret
+  group: "Grafana Settings"
+  label: Select Existing Admin Secret
+- variable: adminUser
+  default: "admin"
+  description: "Grafana admin username"
+  type: string
+  group: "Grafana Settings"
+  label: Grafana Admin Username
+  required: true
+  show_if: "admin.existingSecret="
+- variable: adminPassword
+  default: ""
+  description: "Grafana admin password"
+  type: password
+  group: "Grafana Settings"
+  label: Grafana Admin Password
+  show_if: "admin.existingSecret="
+- variable: rbac.namespaced
+  default: true
+  description: "Creates Role and Rolebinding instead of the default ClusterRole and ClusteRoleBindings for the grafana instance."
+  type: boolean
+  group: "Grafana Settings"
+  label: Set Grafana RBAC to Namespaced
+  show_if: "admin.existingSecret="
 - variable: grafana.ingress.enabled
   default: true
   description: "Expose grafana using Layer 7 Load Balancer - ingress"
