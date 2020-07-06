@@ -73,7 +73,7 @@ questions:
   show_if: "grafana.enabled=true"
 
 - variable: grafana.ingress.enabled
-  default: true
+  default: false
   description: "Expose grafana using Layer 7 Load Balancer - ingress"
   type: boolean
   label: Expose Grafana using Layer 7 Load Balancer
