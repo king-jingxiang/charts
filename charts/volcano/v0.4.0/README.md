@@ -7,41 +7,13 @@
 [![RepoSize](https://img.shields.io/github/repo-size/volcano-sh/volcano.svg)](https://github.com/volcano-sh/volcano)
 [![Release](https://img.shields.io/github/release/volcano-sh/volcano.svg)](https://github.com/volcano-sh/volcano/releases)
 [![LICENSE](https://img.shields.io/github/license/volcano-sh/volcano.svg)](https://github.com/volcano-sh/volcano/blob/master/LICENSE)
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fvolcano-sh%2Fvolcano.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fvolcano-sh%2Fvolcano?ref=badge_shield)   [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/3012/badge)](https://bestpractices.coreinfrastructure.org/projects/3012)
+[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/3012/badge)](https://bestpractices.coreinfrastructure.org/projects/3012)
 
 
-Volcano is a batch system built on Kubernetes. It provides a suite of mechanisms currently missing from
-Kubernetes that are commonly required by many classes of batch & elastic workload including:
-
-1. machine learning/deep learning,
-2. bioinformatics/genomics
-3. other "big data" applications.
-
-These types of applications typically run on generalized domain
-frameworks like TensorFlow, Spark, PyTorch, MPI, etc, which Volcano integrates with.
-
-Some examples of the mechanisms and features that Volcano adds to Kubernetes are:
-
-1. Job management extensions and improvements, e.g:
-    1. Multi-pod jobs
-    2. Lifecycle management extensions including suspend/resume and
-       restart.
-    3. Improved error handling
-    4. Indexed jobs
-    5. Task dependencies
-2. Scheduling extensions, e.g:
-    1. Co-scheduling
-    2. Fair-share scheduling
-    3. Queue scheduling
-    4. Preemption and reclaims
-    5. Reservations and backfills
-    6. Topology-based scheduling
-3. Runtime extensions, e.g:
-    1. Support for specialized container runtimes like Singularity,
-       with GPU accelerator extensions and enhanced security features.
-4. Other
-    1. Data locality awareness and intelligent scheduling
-    2. Optimizations for data throughput, round-trip latency, etc.
+Volcano is a batch system built on Kubernetes. It provides a suite of mechanisms that are commonly required by
+many classes of batch & elastic workload including: machine learning/deep learning, bioinformatics/genomics and
+other "big data" applications. These types of applications typically run on generalized domain frameworks like
+TensorFlow, Spark, PyTorch, MPI, etc, which Volcano integrates with.
 
 Volcano builds upon a decade and a half of experience running a wide
 variety of high performance workloads at scale using several systems
@@ -51,13 +23,30 @@ the open source community.
 **NOTE**: the scheduler is built based on [kube-batch](https://github.com/kubernetes-sigs/kube-batch);
 refer to [#241](https://github.com/volcano-sh/volcano/issues/241) and [#288](https://github.com/volcano-sh/volcano/pull/288) for more detail.
 
+![cncf_logo](docs/images/cncf-logo.png)
+
+Volcano is a sandbox project of the [Cloud Native Computing Foundation](https://cncf.io/) (CNCF). Please consider joining the CNCF if you are an organization that wants to take an active role in supporting the growth and evolution of the cloud native ecosystem. 
+
 ## Overall Architecture
 
 ![volcano](docs/images/volcano-intro.png)
 
 ## Talks
 
-You can watch industry experts talking about Volcano in different International Conferences over [here.](https://volcano.sh/talk/)
+- [Intro: Kubernetes Batch Scheduling @ KubeCon 2019 EU](https://sched.co/MPi7)
+- [Volcano 在 Kubernetes 中运行高性能作业实践 @ ArchSummit 2019](https://archsummit.infoq.cn/2019/shenzhen/presentation/1817)
+- [Volcano：基于云原生的高密计算解决方案 @ Huawei Connection 2019](https://agenda.events.huawei.com/2019/cn/minisite/agenda.html#dayTab=day7&tagName=%7B%22language%22%3A%22Cn%22%7D&seminarId=1743)
+- [Improving Performance of Deep Learning Workloads With Volcano @ KubeCon 2019 NA](https://sched.co/UaZi)
+- [Batch Capability of Kubernetes Intro @ KubeCon 2019 NA](https://sched.co/Uajv)
+
+## Ecosystem
+
+- [Horovod/MPI](https://github.com/volcano-sh/volcano/tree/master/example/integrations/mpi)
+- [kubeflow/tf-operator](https://www.kubeflow.org/docs/use-cases/job-scheduling/)
+- [kubeflow/arena](https://github.com/kubeflow/arena/blob/master/docs/userguide/12-volcanojob.md)
+- [paddlepaddle](https://github.com/volcano-sh/volcano/tree/master/example/integrations/paddlepaddle)
+- [spark-operator](https://github.com/GoogleCloudPlatform/spark-on-k8s-operator/blob/master/docs/volcano-integration.md)
+- [cromwell](https://github.com/broadinstitute/cromwell/blob/develop/docs/backends/Volcano.md)
 
 ## Quick Start Guide
 
@@ -71,7 +60,7 @@ You can try volcano by one the following two ways.
 
 ### Install with YAML files
 
-Install volcano on a existing Kubernetes cluster.
+Install volcano on an existing Kubernetes cluster.
 
 ```
 kubectl apply -f https://raw.githubusercontent.com/volcano-sh/volcano/master/installer/volcano-development.yaml
@@ -107,18 +96,27 @@ job.batch/volcano-admission-init   1/1           48s        96s
 
 ### Install from code
 
-If you have no kubernetes cluster, try one click install from code base:
+If you don't have a kubernetes cluster, try one-click install from code base:
 
 ```bash
 ./hack/local-up-volcano.sh
 ```
 
+## Meeting
 
-## Community, discussion, contribution, and support
+Regular Community Meeting:
 
-You can reach the maintainers of this project at:
+The Volcano team meets once per week on Friday, alternating between 10am Beijing Time ([Convert to your timezone.](https://www.thetimezoneconverter.com/?t=10%3A00&tz=GMT%2B8&)) and 3pm Beijing Time ([Convert to your timezone.](https://www.thetimezoneconverter.com/?t=15%3A00&tz=GMT%2B8&))
 
-Slack Channel : https://volcano-sh.slack.com. (Signup [here](https://join.slack.com/t/volcano-sh/shared_invite/enQtNTU5NTU3NDU0MTc4LTgzZTQ2MzViNTFmNDg1ZGUyMzcwNjgxZGQ1ZDdhOGE3Mzg1Y2NkZjk1MDJlZTZhZWU5MDg2MWJhMzI3Mjg3ZTk))
+Resources:
+- [Meeting notes and agenda](https://docs.google.com/document/d/1YLbF8zjZBiR9PbXQPB22iuc_L0Oui5A1lddVfRnZrqs/edit)
+- [Meeting link](https://zoom.us/j/193601252)
+- [Meeting Calendar](https://calendar.google.com/calendar/b/1/embed?src=volcano.sh.bot@gmail.com) | [Subscribe](https://calendar.google.com/calendar/b/1?cid=dm9sY2Fuby5zaC5ib3RAZ21haWwuY29t)
 
-Mailing List  : https://groups.google.com/forum/#!forum/volcano-sh
+## Contact
 
+If you have any question, feel free to reach out to us in the following ways:
+
+[CNCF Slack Channel](https://cloud-native.slack.com/messages/volcano)
+
+[Mailing List](https://groups.google.com/forum/#!forum/volcano-sh)
