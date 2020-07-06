@@ -23,7 +23,7 @@ questions:
   description: "Enable Fluent-bit To Collect Logs"
   type: boolean
   group: "fluent-bit"
-  show_if: "promtail.enable=false"
+  show_if: "promtail.enabled=false"
   label: Enable Fluent-bit
 
 # grafana configuration
@@ -77,7 +77,6 @@ questions:
   type: boolean
   label: Expose Grafana using Layer 7 Load Balancer
   show_if: "grafana.enabled=true"
-#  show_subquestion_if: true
   group: "Service and Load Balancing"
   required: true
   subquestions:
@@ -87,6 +86,7 @@ questions:
       type: hostname
       required: true
       label: Hostname
+      show_if: "grafana.enabled=true"
 - variable: grafana.service.type
   default: "ClusterIP"
   description: "Grafana service type"
@@ -98,7 +98,6 @@ questions:
   required: true
   label: Grafana Service Type
   show_if: "grafana.enabled=true"
-#  show_subquestion_if: "ClusterIP"
   subquestions:
     - variable: grafana.service.nodePort
       default: ""
