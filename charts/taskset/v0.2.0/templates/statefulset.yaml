@@ -25,6 +25,7 @@ metadata:
 {{ include "taskset.labels" . | indent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
+  serviceName: {{ .Release.Name }}-controller
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ include "taskset.name" . }}

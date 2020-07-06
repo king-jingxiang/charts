@@ -1,10 +1,10 @@
 replicaCount: 1
 
+
 image:
-  repository: 192.168.202.74:5000/openi/tasksetcontroller
-  tag: v0.0.8
+  repository: frameworkcontroller/frameworkcontroller
+  tag: v0.6.0
   pullPolicy: IfNotPresent
-#  imagePullSecrets:
 
 
 resources: {}
