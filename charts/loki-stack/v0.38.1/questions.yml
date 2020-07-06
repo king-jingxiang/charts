@@ -23,6 +23,7 @@ questions:
   group: "fluent-bit"
   show_if: "promtail.enable=false"
   label: fluent-bit.enable
+
 # grafana configuration
 - variable: grafana.enable
   default: false
@@ -37,3 +38,39 @@ questions:
   group: "grafana"
   show_if: "grafana.enable=true"
   label: Grafana Image Tag
+
+- variable: grafana.ingress.enabled
+  default: true
+  description: "Expose grafana using Layer 7 Load Balancer - ingress"
+  type: boolean
+  label: Expose Grafana using Layer 7 Load Balancer
+  show_subquestion_if: true
+  group: "Service and Load Balancing"
+  required: true
+  subquestions:
+    - variable: grafana.ingress.hosts[0]
+      default: "xip.io"
+      description: "Hostname to your grafana installation"
+      type: hostname
+      required: true
+      label: Hostname
+- variable: grafana.service.type
+  default: "NodePort"
+  description: "Grafana service type"
+  type: enum
+  group: "Service and Load Balancing"
+  options:
+    - "ClusterIP"
+    - "NodePort"
+  required: true
+  label: Grafana Service Type
+  show_subquestion_if: "NodePort"
+  subquestions:
+    - variable: grafana.service.nodePort
+      default: ""
+      description: "NodePort http port(to set explicitly, choose port between 30000-32767)"
+      type: int
+      min: 30000
+      max: 32767
+      show_if: "ingress.enabled=false"
+      label: Grafana NodePort Number

@@ -9,10 +9,10 @@ dependencies:
   repository: file://../fluent-bit
   version: 0.1.4
 - name: grafana
-  repository: https://kubernetes-charts.storage.googleapis.com/
+  repository: file://../grafana
   version: 3.8.19
 - name: prometheus
-  repository: https://kubernetes-charts.storage.googleapis.com/
+  repository: file://../prometheus
   version: 9.3.3
 digest: sha256:b8fbea7913c0dc1ee33ef3cd5e0a754c4afe90916528a0c116fe25b9ba4c763c
 generated: 2020-06-30T17:46:39.368189147Z
