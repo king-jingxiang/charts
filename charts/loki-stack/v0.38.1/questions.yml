@@ -98,6 +98,7 @@ questions:
     - "NodePort"
   required: true
   label: Grafana Service Type
+  show_if: "grafana.enabled=true"
   show_subquestion_if: "NodePort"
   subquestions:
     - variable: grafana.service.nodePort
