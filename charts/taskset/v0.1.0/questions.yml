@@ -1,0 +1,41 @@
+categories:
+  - machine learning
+questions:
+# taskset configuration
+- variable: replicaCount
+  default: 1
+  description: "Taskset Replicas"
+  type: int
+  group: "Taskset Configuration"
+  label: Taskset Replicas
+- variable: defaultImage
+  default: true
+  description: "Use default Docker image"
+  label: Use Default Image
+  type: boolean
+  show_subquestion_if: false
+  group: "Container Images"
+  subquestions:
+    - variable: image.repository
+      default: "openi/tasksetcontroller"
+      description: "Taskset image name"
+      type: string
+      label: Taskset Image Name
+    - variable: image.tag
+      default: "v0.0.2"
+      description: "Taskset image tag"
+      type: string
+      label: Taskset Image Tag
+    - variable: image.pullPolicy
+      default: "IfNotPresent"
+      description: "Taskset image PullPolicy"
+      type: enum
+      label: Taskset image PullPolicy
+      options:
+        - "IfNotPresent"
+        - "Always"
+    - variable: image.pullSecret
+      default: ""
+      description: "Taskset Image PullSecret"
+      type: secret
+      label: Select Existing Image Pull Secret

@@ -1,0 +1,11 @@
+apiVersion: v1
+name: taskset
+description: A Helm chart for Taskset
+type: application
+version: 0.2.0
+appVersion: 0.2.0
+
+icon: file://../openilogo.png
+home: https://github.com/open-intelligence/OpenI-Octopus
+sources:
+  - https://github.com/open-intelligence/OpenI-Octopus
