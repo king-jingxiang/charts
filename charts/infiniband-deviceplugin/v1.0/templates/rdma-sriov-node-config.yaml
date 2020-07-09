@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: rdma-devices
-  namespace: kube-system
+  name: rdma-devices-sriov
+  namespace: {{ .Release.Namespace }}
 data:
   config.json: |
     {
         "mode" : "sriov",
-        "pfNetdevices": [ "eth0" , "eth1" ]
+        "pfNetdevices": [ {{ .Values.pfNetdevices }} ]
     }

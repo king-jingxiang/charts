@@ -33,3 +33,16 @@ questions:
       description: "Infiniband Device Plugin Image PullSecret"
       type: secret
       label: Infiniband Device Plugin Image PullSecret
+- variable: enableHCA
+  default: true
+  description: "Use HCA Mode"
+  label: Use Default HCA Mode
+  type: boolean
+  show_subquestion_if: false
+  group: "Infiniband Configuration"
+  subquestions:
+    - variable: sriov.pfNetdevices
+      default: ""
+      description: "Infiniband pfNetdevices example: \"eth0\",\"eth1\""
+      type: string
+      label: Infiniband pfNetdevices

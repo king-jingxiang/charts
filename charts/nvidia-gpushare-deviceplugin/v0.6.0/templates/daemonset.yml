@@ -14,7 +14,7 @@
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: nvidia-device-plugin-daemonset
+  name: nvidia-gpushare-device-plugin-daemonset
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "nvidia-device-plugin.labels" . | nindent 4 }}

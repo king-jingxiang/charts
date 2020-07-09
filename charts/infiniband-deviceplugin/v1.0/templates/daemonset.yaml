@@ -1,9 +1,11 @@
 apiVersion: extensions/v1beta1
 kind: DaemonSet
 metadata:
-  name: rdma-sriov-dp-ds
-  namespace: kube-system
+  name: rdma-devica-plugin-daemonset
+  namespace: {{ .Release.Namespace }}
 spec:
+  updateStrategy:
+    type: RollingUpdate
   template:
     metadata:
       # Mark this pod as a critical add-on; when enabled, the critical add-on scheduler
@@ -12,8 +14,11 @@ spec:
       annotations:
         scheduler.alpha.kubernetes.io/critical-pod: ""
       labels:
-        name: rdma-sriov-dp-ds
+        name: rdma-devica-plugin-daemonset
     spec:
+      priorityClassName: "system-node-critical"
+      imagePullSecrets:
+        - name: {{ .Values.image.imagePullSecrets }}
       hostNetwork: true
       tolerations:
         # Allow this pod to be rescheduled while the node is in "critical add-ons only" mode.
@@ -21,7 +26,7 @@ spec:
         - key: CriticalAddonsOnly
           operator: Exists
       containers:
-        - image: rdma/k8s-rdma-sriov-dev-plugin:x86_64
+        - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           name: k8s-rdma-sriov-dp-ds
           imagePullPolicy: IfNotPresent
           securityContext:
@@ -37,7 +42,23 @@ spec:
             path: /var/lib/kubelet/device-plugins
         - name: config
           configMap:
-            name: rdma-devices
+            {{- if .Values.enableHCA }}
+            name: rdma-devices-hca
+            {{- else }}
+            name: rdma-devices-sriov
+            {{- end }}
             items:
               - key: config.json
                 path: config.json
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
