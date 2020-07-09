@@ -14,16 +14,14 @@
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: nvidia-gpushare-device-plugin-daemonset
+  name: nvidia-device-plugin-daemonset
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "nvidia-device-plugin.labels" . | nindent 4 }}
 spec:
-  {{- if not .Values.legacyDaemonsetAPI }}
   selector:
     matchLabels:
       {{- include "nvidia-device-plugin.selectorLabels" . | nindent 6 }}
-  {{- end }}
   updateStrategy:
     type: RollingUpdate
   template:
@@ -63,9 +61,9 @@ spec:
         - name: device-plugin
           hostPath:
             path: /var/lib/kubelet/device-plugins
-      {{- with .Values.nodeSelector }}
+      {{- if .Values.enableNodeSelector }}
       nodeSelector:
-        {{- toYaml . | nindent 8 }}
+        {{ .Values.nodeSelector.key }}: {{ .Values.nodeSelector.value }}
       {{- end }}
       {{- with .Values.affinity }}
       affinity:

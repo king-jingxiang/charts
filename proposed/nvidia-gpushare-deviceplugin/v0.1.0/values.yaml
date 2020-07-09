@@ -5,8 +5,10 @@ image:
 
 compatWithCPUManager: false
 
-nodeSelector: {}
-#nodeSelector: {nvidia-gpu: true}
+enableNodeSelector: false
+nodeSelector:
+  key:
+  value:
 
 affinity: {}
 
