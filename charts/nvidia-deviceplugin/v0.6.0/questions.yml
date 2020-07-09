@@ -39,9 +39,9 @@ questions:
   description: "The compatWithCPUManager flag configures the daemonset to be able to interoperate with the static CPUManager of the kubelet. Setting this flag requires one to deploy the daemonset with elevated privileges, so only do so if you know you need to interoperate with the CPUManager."
   type: boolean
   label: Nvidia Device Plugin CompatWithCPUManager
-
-- variable: nodeSelector
-  default: ""
-  description: "set node label selector,example: nodeSelector.nvidia-gpu=true"
-  type: string
-  label: Nvidia Device Plugin Node Selector
+# TODO 修改为子结构
+#- variable: nodeSelector
+#  default: ""
+#  description: "set node label selector,example: nodeSelector.nvidia-gpu=true"
+#  type: string
+#  label: Nvidia Device Plugin Node Selector

@@ -5,7 +5,7 @@ home: https://github.com/NVIDIA/k8s-device-plugin
 sources:
   - https://github.com/NVIDIA/k8s-device-plugin
 kubeVersion: '>= 1.10.0-0'
-name: nvidia-device-plugin
+name: nvidia-gpushare-device-plugin
 type: application
 version: 0.6.0
 icon: file://../nvidialogo.png
