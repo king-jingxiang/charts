@@ -18,7 +18,6 @@ spec:
       labels:
         {{- include "cambricon-devica-plugin.selectorLabels" . | nindent 8 }}
     spec:
-      priorityClassName: "system-node-critical"
       imagePullSecrets:
         - name: {{ .Values.image.imagePullSecrets }}
       containers:

@@ -7,4 +7,4 @@ sources:
 name: cambricon-devica-plugin
 type: application
 version: 0.1.0
-icon: file://../cambriconlogo.jpeg
+icon: file://../cambriconlogo.png
