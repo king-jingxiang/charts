@@ -19,11 +19,9 @@ metadata:
   labels:
     {{- include "nvidia-device-plugin.labels" . | nindent 4 }}
 spec:
-  {{- if not .Values.legacyDaemonsetAPI }}
   selector:
     matchLabels:
       {{- include "nvidia-device-plugin.selectorLabels" . | nindent 6 }}
-  {{- end }}
   updateStrategy:
     type: RollingUpdate
   template:
