@@ -1,0 +1,10 @@
+apiVersion: v1
+appVersion: 0.1.0
+description: A Helm chart for the cambricon-devica-plugin on Kubernetes
+home: https://github.com/Cambricon/cambricon-k8s-device-plugin
+sources:
+  - https://github.com/Cambricon/cambricon-k8s-device-plugin
+name: cambricon-devica-plugin
+type: application
+version: 0.1.0
+icon: file://../cambriconlogo.jpeg

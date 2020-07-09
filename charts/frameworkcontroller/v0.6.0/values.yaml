@@ -3,7 +3,7 @@ replicaCount: 1
 
 image:
   repository: frameworkcontroller/frameworkcontroller
-  tag: v0.6.0
+  tag: v0.1.0
   pullPolicy: IfNotPresent
 
 

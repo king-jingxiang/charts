@@ -1,0 +1,54 @@
+categories:
+  - ai platform
+questions:
+# Cambricon device plugin configuration
+- variable: defaultImage
+  default: true
+  description: "Use default Docker image"
+  label: Use Default Image
+  type: boolean
+  show_subquestion_if: false
+  group: "Container Images"
+  subquestions:
+    - variable: image.repository
+      default: "ruanxingbaozi/cambricon-k8s-device-plugin"
+      description: "Cambricon Device Plugin image name"
+      type: string
+      label: Cambricon Device Plugin Image Name
+    - variable: image.tag
+      default: "v0.3.2"
+      description: "Cambricon Device Plugin image tag"
+      type: string
+      label: Cambricon Device Plugin Image Tag
+    - variable: image.pullPolicy
+      default: "IfNotPresent"
+      description: "Cambricon Device Plugin image PullPolicy"
+      type: enum
+      label: Cambricon Device Plugin image PullPolicy
+      options:
+        - "IfNotPresent"
+        - "Always"
+    - variable: image.pullSecret
+      default: ""
+      description: "Cambricon Device Plugin Image PullSecret"
+      type: secret
+      label: Cambricon Device Plugin Image PullSecret
+
+- variable: enableNodeSelector
+  default: false
+  description: "Set Node Label Selector"
+  label: EnableNodeSelector
+  type: boolean
+  show_subquestion_if: true
+  group: "NodelSelectors"
+  subquestions:
+    - variable: nodeSelector.key
+      default: "kubernetes.io/cambricon-mlu"
+      description: "Cambricon Node Label"
+      type: string
+      label: Cambricon Node Selector key
+    - variable: nodeSelector.value
+      default: "exist"
+      description: "Cambricon Node Label Value"
+      type: string
+      label: Cambricon Node Selector Value

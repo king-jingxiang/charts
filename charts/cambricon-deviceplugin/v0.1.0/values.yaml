@@ -1,0 +1,18 @@
+image:
+  repository: ruanxingbaozi/cambricon-k8s-device-plugin
+  tag: v0.3.2
+  pullPolicy: IfNotPresent
+
+enableNodeSelector: false
+nodeSelector:
+  key:
+  value:
+
+affinity: {}
+
+tolerations:
+  - key: CriticalAddonsOnly
+    operator: Exists
+  - key: cambricon.com/mlu
+    operator: Exists
+    effect: NoSchedule

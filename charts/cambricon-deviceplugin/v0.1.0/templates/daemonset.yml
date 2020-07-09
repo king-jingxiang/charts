@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: cambricon-devica-plugin-daemonset
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "cambricon-devica-plugin.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "cambricon-devica-plugin.selectorLabels" . | nindent 6 }}
+  updateStrategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        scheduler.alpha.kubernetes.io/critical-pod: ""
+      labels:
+        {{- include "cambricon-devica-plugin.selectorLabels" . | nindent 8 }}
+    spec:
+      priorityClassName: "system-node-critical"
+      imagePullSecrets:
+        - name: {{ .Values.image.imagePullSecrets }}
+      containers:
+      - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        name: cambricon-devica-plugin-ctr
+        securityContext:
+          privileged: true
+        volumeMounts:
+          - name: device-plugin
+            mountPath: /var/lib/kubelet/device-plugins
+      volumes:
+        - name: device-plugin
+          hostPath:
+            path: /var/lib/kubelet/device-plugins
+      {{- if .Values.enableNodeSelector }}
+      nodeSelector:
+        {{ .Values.nodeSelector.key }}: {{ .Values.nodeSelector.value }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
