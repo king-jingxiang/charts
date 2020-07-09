@@ -63,9 +63,9 @@ spec:
         - name: device-plugin
           hostPath:
             path: /var/lib/kubelet/device-plugins
-      {{- with .Values.nodeSelector }}
+      {{- if .Values.enableNodeSelector }}
       nodeSelector:
-        {{- toYaml . | nindent 8 }}
+        {{ .Values.nodeSelector.key }}: {{ .Values.nodeSelector.value }}
       {{- end }}
       {{- with .Values.affinity }}
       affinity:

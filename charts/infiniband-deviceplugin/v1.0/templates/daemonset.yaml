@@ -1,8 +1,10 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: rdma-devica-plugin-daemonset
   namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "rdma-devica-plugin.labels" . | nindent 4 }}
 spec:
   updateStrategy:
     type: RollingUpdate
@@ -14,7 +16,7 @@ spec:
       annotations:
         scheduler.alpha.kubernetes.io/critical-pod: ""
       labels:
-        name: rdma-devica-plugin-daemonset
+        {{- include "rdma-devica-plugin.selectorLabels" . | nindent 8 }}
     spec:
       imagePullSecrets:
         - name: {{ .Values.image.imagePullSecrets }}
@@ -58,6 +60,3 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       {{- with .Values.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
