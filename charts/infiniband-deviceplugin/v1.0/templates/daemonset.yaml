@@ -16,7 +16,6 @@ spec:
       labels:
         name: rdma-devica-plugin-daemonset
     spec:
-      priorityClassName: "system-node-critical"
       imagePullSecrets:
         - name: {{ .Values.image.imagePullSecrets }}
       hostNetwork: true
