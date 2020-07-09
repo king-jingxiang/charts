@@ -1,4 +1,4 @@
-apiVersion: v2
+apiVersion: v1
 appVersion: 0.6.0
 description: A Helm chart for the nvidia-device-plugin on Kubernetes
 home: https://github.com/NVIDIA/k8s-device-plugin
