@@ -7,5 +7,5 @@ data:
   config.json: |
     {
         "mode" : "sriov",
-        "pfNetdevices": [ {{ .Values.pfNetdevices }} ]
+        "pfNetdevices": [ {{ .Values.sriov.pfNetdevices }} ]
     }
