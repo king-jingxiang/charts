@@ -1,5 +1,7 @@
 categories:
   - ai platform
+labels:
+  io.rancher.certified: experimental
 questions:
 # nvidia device plugin configuration
 - variable: defaultImage

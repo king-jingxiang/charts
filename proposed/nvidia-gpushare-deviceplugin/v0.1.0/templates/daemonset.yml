@@ -14,14 +14,14 @@
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: nvidia-device-plugin-daemonset
+  name: nvidia-gpushare-device-plugin-daemonset
   namespace: {{ .Release.Namespace }}
   labels:
-    {{- include "nvidia-device-plugin.labels" . | nindent 4 }}
+    {{- include "nvidia-gpushare-device-plugin.labels" . | nindent 4 }}
 spec:
   selector:
     matchLabels:
-      {{- include "nvidia-device-plugin.selectorLabels" . | nindent 6 }}
+      {{- include "nvidia-gpushare-device-plugin.selectorLabels" . | nindent 6 }}
   updateStrategy:
     type: RollingUpdate
   template:
@@ -31,7 +31,7 @@ spec:
       annotations:
         scheduler.alpha.kubernetes.io/critical-pod: ""
       labels:
-        {{- include "nvidia-device-plugin.selectorLabels" . | nindent 8 }}
+        {{- include "nvidia-gpushare-device-plugin.selectorLabels" . | nindent 8 }}
     spec:
       # Mark this pod as a critical add-on; when enabled, the critical add-on
       # scheduler reserves resources for critical add-on pods so that they can
@@ -43,7 +43,7 @@ spec:
       containers:
       - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
-        name: nvidia-device-plugin-ctr
+        name: nvidia-gpushare-device-plugin-ctr
         {{- if .Values.compatWithCPUManager }}
         args: ["--pass-device-specs"]
         securityContext:
