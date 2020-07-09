@@ -49,12 +49,12 @@ questions:
   group: "NodelSelectors"
   subquestions:
     - variable: nodeSelector.key
-      default: "nvidia-gpu"
+      default: "kubernetes.io/nvidia-gpu"
       description: "Nvidia Node Label"
       type: string
       label: Nvidia Node Selector key
     - variable: nodeSelector.value
-      default: "true"
+      default: "exist"
       description: "Nvidia Node Label Value"
       type: string
       label: Nvidia Node Selector Value
