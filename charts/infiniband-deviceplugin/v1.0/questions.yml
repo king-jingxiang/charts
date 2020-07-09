@@ -56,12 +56,12 @@ questions:
   group: "NodelSelectors"
   subquestions:
     - variable: nodeSelector.key
-      default: "infiniband-rdma"
+      default: "kubernetes.io/infiniband-rdma"
       description: "Infiniband Node Label"
       type: string
       label: Infiniband Node Selector key
     - variable: nodeSelector.value
-      default: "true"
+      default: "exist"
       description: "Infiniband Node Label Value"
       type: string
       label: Infiniband Node Selector Value
