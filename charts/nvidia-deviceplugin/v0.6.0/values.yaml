@@ -5,8 +5,6 @@ image:
 
 compatWithCPUManager: false
 
-namespace: kube-system
-
 nodeSelector: {}
 
 affinity: {}
