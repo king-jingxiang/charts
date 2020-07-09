@@ -46,3 +46,22 @@ questions:
       description: "Infiniband pfNetdevices example: \"eth0\",\"eth1\""
       type: string
       label: Infiniband pfNetdevices
+
+- variable: enableNodeSelector
+  default: false
+  description: "Set Node Label Selector"
+  label: EnableNodeSelector
+  type: boolean
+  show_subquestion_if: true
+  group: "NodelSelectors"
+  subquestions:
+    - variable: nodeSelector.key
+      default: "infiniband-rdma"
+      description: "Infiniband Node Label"
+      type: string
+      label: Infiniband Node Selector key
+    - variable: nodeSelector.value
+      default: "true"
+      description: "Infiniband Node Label Value"
+      type: string
+      label: Infiniband Node Selector Value
