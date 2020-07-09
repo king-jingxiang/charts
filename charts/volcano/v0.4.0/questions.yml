@@ -10,7 +10,7 @@ questions:
   group: "Container Images"
   subquestions:
   - variable: basic.image_tag_version
-    default: "v0.4.0"
+    default: "v0.4"
     description: "Volcano Image Tag"
     type: string
     label: Image Tag
@@ -39,8 +39,8 @@ questions:
   label: Adminssion Secret Name
 
 - variable: basic.scheduler_config_file
-  default: "volcano-scheduler.conf"
-  description: "Volcano Scheduler Config File: [volcano-scheduler.conf,volcano-scheduler-ci.conf]"
+  default: "config/volcano-scheduler.conf"
+  description: "Volcano Scheduler Config File: [config/volcano-scheduler.conf,config/volcano-scheduler-ci.conf]"
   type: string
   group: "Volcano Settings"
   label: Scheduler Config File
