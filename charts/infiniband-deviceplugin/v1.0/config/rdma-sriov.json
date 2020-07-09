@@ -1,0 +1,7 @@
+{
+  "mode": "sriov",
+  "pfNetdevices": [
+    "eth0",
+    "eth1"
+  ]
+}

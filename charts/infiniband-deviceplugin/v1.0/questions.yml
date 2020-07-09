@@ -1,0 +1,35 @@
+categories:
+  - ai platform
+questions:
+# Infiniband device plugin configuration
+- variable: defaultImage
+  default: true
+  description: "Use default Docker image"
+  label: Use Default Image
+  type: boolean
+  show_subquestion_if: false
+  group: "Container Images"
+  subquestions:
+    - variable: image.repository
+      default: "rdma/k8s-rdma-sriov-dev-plugin"
+      description: "Infiniband Device Plugin image name"
+      type: string
+      label: Infiniband Device Plugin Image Name
+    - variable: image.tag
+      default: "x86_64"
+      description: "Infiniband Device Plugin image tag"
+      type: string
+      label: Infiniband Device Plugin Image Tag
+    - variable: image.pullPolicy
+      default: "IfNotPresent"
+      description: "Infiniband Device Plugin image PullPolicy"
+      type: enum
+      label: Infiniband Device Plugin image PullPolicy
+      options:
+        - "IfNotPresent"
+        - "Always"
+    - variable: image.pullSecret
+      default: ""
+      description: "Infiniband Device Plugin Image PullSecret"
+      type: secret
+      label: Infiniband Device Plugin Image PullSecret

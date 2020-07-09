@@ -1,0 +1,20 @@
+image:
+  repository: nvidia/k8s-device-plugin
+  tag: 0.6.0
+  pullPolicy: IfNotPresent
+
+compatWithCPUManager: false
+
+nodeSelector: {}
+#nodeSelector: {nvidia-gpu: true}
+
+affinity: {}
+
+tolerations:
+  # This toleration is deprecated. Kept here for backward compatibility
+  # See https://kubernetes.io/docs/tasks/administer-cluster/guaranteed-scheduling-critical-addon-pods/
+  - key: CriticalAddonsOnly
+    operator: Exists
+  - key: nvidia.com/gpu
+    operator: Exists
+    effect: NoSchedule
