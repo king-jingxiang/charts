@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: device-plugin-recover-ds
-  namespace: kube-system
+  namespace: {{ .Release.Namespace }}
 spec:
   updateStrategy:
     type: RollingUpdate
