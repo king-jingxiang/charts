@@ -77,13 +77,13 @@ affinity: {}
   #      - key: nvidia-gpu
   #        operator: Exists
 
-extraHostVolumes: []
-- name: docker-sock
-  hostPath: /var/run/docker.sock
+extraHostVolumes:
+  - name: docker-sock
+    hostPath: /var/run/docker.sock
 
-extraVolumeMounts: []
-- name: docker-sock
-  mountPath: /var/run/docker.sock
+extraVolumeMounts:
+  - name: docker-sock
+    mountPath: /var/run/docker.sock
 
 extraEnv: []
 #- name: EXTRA_VAR
