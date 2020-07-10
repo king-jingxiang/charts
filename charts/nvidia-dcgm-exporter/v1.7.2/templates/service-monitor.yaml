@@ -17,9 +17,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: {{ include "nvidia-dcgm-exporter.fullname" . }}
-{{- if .Values.serviceMonitor.namespace }}
-  namespace: {{ .Values.serviceMonitor.namespace }}
-{{- end }}
+  namespace: {{ .Release.Namespace }}
   labels:
     {{- include "nvidia-dcgm-exporter.labels" . | nindent 4 }}
     app.kubernetes.io/component: "nvidia-dcgm-exporter"
