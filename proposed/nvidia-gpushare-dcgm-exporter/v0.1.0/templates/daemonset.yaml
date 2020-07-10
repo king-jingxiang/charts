@@ -1,36 +1,36 @@
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: nvidia-gpushare-device-plugin-daemonset
+  name: nvidia-gpushare-dcgm-expoter-daemonset
   namespace: {{ .Release.Namespace }}
   labels:
-    {{- include "nvidia-gpushare-device-plugin.labels" . | nindent 4 }}
-    app.kubernetes.io/component: "nvidia-gpushare-device-plugin"
+    {{- include "nvidia-gpushare-dcgm-exporter.labels" . | nindent 4 }}
+    app.kubernetes.io/component: "nvidia-gpushare-dcgm-exporter"
 spec:
   updateStrategy:
     type: RollingUpdate
   selector:
     matchLabels:
-      {{- include "nvidia-gpushare-device-plugin.selectorLabels" . | nindent 6 }}
-      app.kubernetes.io/component: "nvidia-gpushare-device-plugin"
+      {{- include "nvidia-gpushare-dcgm-exporter.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: "nvidia-gpushare-dcgm-exporter"
 spec:
   updateStrategy:
     type: RollingUpdate
   selector:
     matchLabels:
-      {{- include "nvidia-gpushare-device-plugin.selectorLabels" . | nindent 6 }}
-      app.kubernetes.io/component: "nvidia-gpushare-device-plugin"
+      {{- include "nvidia-gpushare-dcgm-exporter.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: "nvidia-gpushare-dcgm-exporter"
   template:
     metadata:
       labels:
-        {{- include "nvidia-gpushare-device-plugin.selectorLabels" . | nindent 8 }}
-        app.kubernetes.io/component: "nvidia-gpushare-device-plugin"
+        {{- include "nvidia-gpushare-dcgm-exporter.selectorLabels" . | nindent 8 }}
+        app.kubernetes.io/component: "nvidia-gpushare-dcgm-exporter"
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         - name: {{ .Values.image.imagePullSecrets }}
       {{- end }}
-      serviceAccountName: {{ include "nvidia-gpushare-device-plugin.serviceAccountName" . }}
+      serviceAccountName: {{ include "nvidia-gpushare-dcgm-exporter.serviceAccountName" . }}
       {{- if .Values.podSecurityContext }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}

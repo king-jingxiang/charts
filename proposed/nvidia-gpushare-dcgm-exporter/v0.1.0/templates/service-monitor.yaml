@@ -2,19 +2,19 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: {{ include "nvidia-gpushare-device-plugin.fullname" . }}
+  name: {{ include "nvidia-gpushare-dcgm-exporter.fullname" . }}
   namespace: {{ .Release.Namespace }}
   labels:
-    {{- include "nvidia-gpushare-device-plugin.labels" . | nindent 4 }}
-    app.kubernetes.io/component: "nvidia-gpushare-device-plugin"
+    {{- include "nvidia-gpushare-dcgm-exporter.labels" . | nindent 4 }}
+    app.kubernetes.io/component: "nvidia-gpushare-dcgm-exporter"
     {{- if .Values.serviceMonitor.additionalLabels }}
     {{- toYaml .Values.serviceMonitor.additionalLabels | nindent 4 }}
     {{- end }}
 spec:
   selector:
     matchLabels:
-      {{- include "nvidia-gpushare-device-plugin.selectorLabels" . | nindent 6 }}
-      app.kubernetes.io/component: "nvidia-gpushare-device-plugin"
+      {{- include "nvidia-gpushare-dcgm-exporter.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: "nvidia-gpushare-dcgm-exporter"
   endpoints:
   - port: "metrics"
     path: "/metrics"

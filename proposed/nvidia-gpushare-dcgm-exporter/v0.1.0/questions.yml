@@ -18,7 +18,7 @@ questions:
       type: string
       label: Nvidia gpushare dcgm Expoter Image Name
     - variable: image.tag
-      default: "0.1.0"
+      default: "v0.1.0"
       description: "Nvidia gpushare dcgm Expoter image tag"
       type: string
       label: Nvidia gpushare dcgm Expoter Image Tag
