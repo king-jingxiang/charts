@@ -1,0 +1,68 @@
+categories:
+  - ai platform
+questions:
+# Nvidia dcgm Expoter configuration
+- variable: defaultImage
+  default: true
+  description: "Use default Docker image"
+  label: Use Default Image
+  type: boolean
+  show_subquestion_if: false
+  group: "Container Images"
+  subquestions:
+    - variable: image.repository
+      default: "nvidia/dcgm-exporter"
+      description: "Nvidia dcgm Expoter image name"
+      type: string
+      label: Nvidia dcgm Expoter Image Name
+    - variable: image.tag
+      default: "1.7.2"
+      description: "Nvidia dcgm Expoter image tag"
+      type: string
+      label: Nvidia dcgm Expoter Image Tag
+    - variable: image.pullPolicy
+      default: "IfNotPresent"
+      description: "Nvidia dcgm Expoter image PullPolicy"
+      type: enum
+      label: Nvidia dcgm Expoter image PullPolicy
+      options:
+        - "IfNotPresent"
+        - "Always"
+    - variable: image.pullSecret
+      default: ""
+      description: "Nvidia dcgm Expoter Image PullSecret"
+      type: secret
+      label: Nvidia dcgm Expoter Image PullSecret
+
+- variable: enableNodeSelector
+  default: false
+  description: "Set Node Label Selector"
+  label: EnableNodeSelector
+  type: boolean
+  show_subquestion_if: true
+  group: "NodelSelectors"
+  subquestions:
+    - variable: nodeSelector.key
+      default: "kubernetes.io/nvidia-gpu"
+      description: "Nvidia Node Label"
+      type: string
+      label: Nvidia Node Selector key
+    - variable: nodeSelector.value
+      default: "exist"
+      description: "Nvidia Node Label Value"
+      type: string
+      label: Nvidia Node Selector Value
+
+- variable: serviceMonitor.enabled
+  default: true
+  description: "Enable Service Mointor"
+  label: Enable Services
+  type: boolean
+  show_subquestion_if: true
+  group: "Expoter Services"
+  subquestions:
+    - variable: serviceMonitor.interval
+      default: "15s"
+      description: "Service Monitor Interval"
+      type: string
+      label: Service Monitor Interval
