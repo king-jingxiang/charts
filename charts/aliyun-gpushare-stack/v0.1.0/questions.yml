@@ -1,0 +1,62 @@
+categories:
+  - ai platform
+questions:
+# aliyun gpushare nvidia device plugin configuration
+- variable: defaultImage
+  default: true
+  description: "Use default Docker image"
+  label: Use Default Image
+  type: boolean
+  show_subquestion_if: false
+  group: "Container Images"
+  subquestions:
+    - variable: images.extender.image
+      default: "registry.cn-beijing.aliyuncs.com/acs/k8s-gpushare-schd-extender"
+      type: string
+      label: Extender Image Name
+    - variable: images.extender.tag
+      default: "v1.0.0-b56d26d-aliyun"
+      type: string
+      label: Extender Image Tag
+
+    - variable: images.installer.image
+      default: "registry.cn-beijing.aliyuncs.com/acs/schd-extender-deployer"
+      type: string
+      label: Installer Image Name
+    - variable: images.installer.tag
+      default: "v1.0.0-b56d26d-aliyun"
+      type: string
+      label: Installer Image Tag
+
+    - variable: images.devicePlugin.image
+      default: "registry.cn-beijing.aliyuncs.com/acs/k8s-gpushare-plugin"
+      type: string
+      label: Device Plugin Image Name
+    - variable: images.devicePlugin.tag
+      default: "v1.0.0-2656995-aliyun"
+      type: string
+      label: Device Plugin Image Tag
+
+    - variable: images.evictor.image
+      default: "registry.cn-beijing.aliyuncs.com/acs/nvidia-device-plugin-evict"
+      type: string
+      label: Evictor Image Name
+    - variable: images.evictor.tag
+      default: "v1.0.0-b56d26d-aliyun"
+      type: string
+      label: Evictor Image Tag
+
+    - variable: images.recover.image
+      default: "registry.cn-beijing.aliyuncs.com/acs/nvidia-device-plugin-recover"
+      type: string
+      label: Recover Image Name
+    - variable: images.recover.tag
+      default: "v1.0.0-b56d26d-aliyun"
+      type: string
+      label: Recover Image Tag
+
+- variable: masterCount
+  default: 3
+  description: "gpushare Parallelism Count"
+  type: int
+  label: gpushare Parallelism Count
