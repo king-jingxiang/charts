@@ -1,9 +1,11 @@
 image:
-  repository: nvidia/k8s-device-plugin
-  tag: 0.6.0
+  repository: ruanxingbaozi/k8s-gpushare-device-plugin
+  tag: v0.1.2
   pullPolicy: IfNotPresent
 
 compatWithCPUManager: false
+
+vgpuMemSize: 1
 
 enableNodeSelector: false
 nodeSelector:

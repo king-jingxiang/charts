@@ -1,3 +1,3 @@
 # Nvidia Device Plugin Helm Chart
 
-* For more information visit: [Nvidia K8s Device Plugin](https://github.com/NVIDIA/k8s-device-plugin)
+* For more information visit: [Nvidia K8s gpushare Device Plugin](https://github.com/ruanxingbaozi/k8s-gpushare-device-plugin)

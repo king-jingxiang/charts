@@ -45,10 +45,11 @@ spec:
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         name: nvidia-gpushare-device-plugin-ctr
         {{- if .Values.compatWithCPUManager }}
-        args: ["--pass-device-specs"]
+        args: ["--pass-device-specs","--vgpuMemorySize={{ .Values.vgpuMemSize }}"]
         securityContext:
           privileged: true
         {{- else }}
+        args: ["--vgpuMemorySize={{ .Values.vgpuMemSize }}"]
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:

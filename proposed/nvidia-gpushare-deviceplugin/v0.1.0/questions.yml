@@ -3,7 +3,7 @@ categories:
 labels:
   io.rancher.certified: experimental
 questions:
-# nvidia device plugin configuration
+# Nvidia gpushare Device Plugin configuration
 - variable: defaultImage
   default: true
   description: "Use default Docker image"
@@ -13,34 +13,40 @@ questions:
   group: "Container Images"
   subquestions:
     - variable: image.repository
-      default: "nvidia/k8s-device-plugin"
-      description: "Nvidia Device Plugin image name"
+      default: "ruanxingbaozi/k8s-gpushare-device-plugin"
+      description: "Nvidia gpushare Device Plugin image name"
       type: string
-      label: Nvidia Device Plugin Image Name
+      label: Nvidia gpushare Device Plugin Image Name
     - variable: image.tag
-      default: "0.6.0"
-      description: "Nvidia Device Plugin image tag"
+      default: "v0.1.2"
+      description: "Nvidia gpushare Device Plugin image tag"
       type: string
-      label: Nvidia Device Plugin Image Tag
+      label: Nvidia gpushare Device Plugin Image Tag
     - variable: image.pullPolicy
       default: "IfNotPresent"
-      description: "Nvidia Device Plugin image PullPolicy"
+      description: "Nvidia gpushare Device Plugin image PullPolicy"
       type: enum
-      label: Nvidia Device Plugin image PullPolicy
+      label: Nvidia gpushare Device Plugin image PullPolicy
       options:
         - "IfNotPresent"
         - "Always"
     - variable: image.pullSecret
       default: ""
-      description: "Nvidia Device Plugin Image PullSecret"
+      description: "Nvidia gpushare Device Plugin Image PullSecret"
       type: secret
-      label: Nvidia Device Plugin Image PullSecret
+      label: Nvidia gpushare Device Plugin Image PullSecret
+
+- variable: vgpuMemSize
+  default: 1
+  description: "Virtual GPU Memory Size(GiB)"
+  type: int
+  label: Virtual GPU Memory Size(GiB)
 
 - variable: compatWithCPUManager
   default: "false"
   description: "The compatWithCPUManager flag configures the daemonset to be able to interoperate with the static CPUManager of the kubelet. Setting this flag requires one to deploy the daemonset with elevated privileges, so only do so if you know you need to interoperate with the CPUManager."
   type: boolean
-  label: Nvidia Device Plugin CompatWithCPUManager
+  label: Nvidia gpushare Device Plugin CompatWithCPUManager
 
 - variable: enableNodeSelector
   default: false
