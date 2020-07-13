@@ -24,7 +24,6 @@ taskset:
   podgroup:
     name: pg1
     minMember: 2
-  schedulerName: kube-batch
   worker:
     replicas: 1
   shared:
@@ -41,7 +40,15 @@ framework:
   enabled: false
 
 volcano:
-  enabled: false
+  enabled: true
+  minMember: 2
+  schedulerName: volcano
+  worker:
+    replicas: 1
+  image:
+    job:
+      name: registry.cn-shanghai.aliyuncs.com/ruanxingbaozi/pytorch
+      tag: 20.06-py3
 
 pytorch-operator:
   enabled: false

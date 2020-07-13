@@ -1,0 +1,45 @@
+apiVersion: batch.volcano.sh/v1alpha1
+kind: Job
+metadata:
+  name: pytorch-ringallreduce
+  namespace: {{ .Release.Namespace }}
+  labels:
+    "volcano.sh/job-type": "Pytorch"
+spec:
+  minAvailable: {{ .Values.minMember }}
+  schedulerName: {{ .Values.schedulername }}
+  plugins:
+    env: []
+    svc: []
+  policies:
+    - event: PodEvicted
+      action: RestartJob
+  tasks:
+    - replicas: {{ .Values.replicas }}
+      name: worker
+      template:
+        spec:
+          containers:
+            - command:
+                - sh
+                - -c
+                - |
+                  WORKER_HOST=`cat /etc/volcano/worker.host | sed 's/$/&:23456/g' | tr "\n" ","`;
+                  python /code/main.py --backend {{ .Values.global.training.backend }} --init-method tcp://${WORKER_HOST} --world-size {{ .Values.global.training.worldsize }} --rank ${VK_TASK_INDEX} --arch {{ .Values.global.training.arch }} --epochs {{ .Values.global.training.epochs }} --batch-size {{ .Values.global.training.batchsize }} --learning-rate {{ .Values.global.training.learningrate }}
+              image: "{{ .Values.image.job.name }}:{{ .Values.image.job.tag }}"
+              name: worker
+              securityContext:
+                capabilities:
+                  add: [ "IPC_LOCK" ]
+              ports:
+                - containerPort: 23456
+                  name: job-port
+              resources:
+                limits:
+                  {{ if gt .Values.global.gpu.num 0.0 }}
+                    {{ .Values.global.gpu.name }}: {{ .Values.global.gpu.num }}
+                    {{- end }}
+                    {{- if eq .Values.global.rdma.enable true  }}
+                    {{ .Values.global.rdma.name }}: 1
+                    {{- end }}
+          restartPolicy: OnFailure

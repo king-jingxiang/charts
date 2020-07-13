@@ -159,3 +159,35 @@ questions:
   description: "Taskset Poddiscovery Need A Shared Directory"
   label: Takset Shared Path
   show_if: "crd=taskset"
+
+# volcano configuration
+- variable: volcano.enabled
+  default: true
+  type: boolean
+  label: Enable Volcano
+  show_if: "crd=volcano"
+- variable: volcano.minMember
+  default: 1
+  type: int
+  label: Volcano minMember
+  show_if: "crd=volcano"
+- variable: volcano.schedulerName
+  default: "volcano"
+  type: string
+  label: Volcano Scheduler Name
+  show_if: "crd=volcano"
+- variable: volcano.worker.replicas
+  default: 1
+  type: int
+  label: Volcano worker Replicas
+  show_if: "crd=volcano"
+- variable: volcano.image.job.name
+  default: "registry.cn-shanghai.aliyuncs.com/ruanxingbaozi/pytorch"
+  type: string
+  label: Volcano Job Image Name
+  show_if: "crd=volcano"
+- variable: volcano.image.job.tag
+  default: "20.06-py3"
+  type: string
+  label: Volcano Job Image Name
+  show_if: "crd=volcano"
