@@ -42,7 +42,7 @@ framework:
 volcano:
   enabled: true
   minMember: 2
-  schedulerName: volcano
+  schedulername: volcano
   worker:
     replicas: 1
   image:
