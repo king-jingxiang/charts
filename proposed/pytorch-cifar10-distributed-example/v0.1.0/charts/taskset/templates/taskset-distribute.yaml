@@ -1,0 +1,66 @@
+apiVersion: octopus.openi.pcl.cn/v1alpha1
+kind: TaskSet
+metadata:
+  name: pytorchringallreduce
+  namespace: {{ .Release.Namespace }}
+spec:
+  retryPolicy:
+    retry: false
+    maxRetryCount: 1
+  roles:
+    - name: worker
+      replicas: {{ .Values.worker.replicas }}
+      eventPolicy: []
+      completionPolicy:
+        maxFailed: 1
+        minSucceeded: 1
+      retryPolicy:
+        retry: true
+        maxRetryCount: 1
+      template:
+        metadata:
+          annotations:
+            scheduling.k8s.io/group-name: {{ .Values.podgroup.name }}
+        spec:
+          schedulerName: {{ .Values.schedulername }}
+          restartPolicy: Never
+          containers:
+            - name: worker
+              image: "{{ .Values.image.job.name }}:{{ .Values.image.job.tag }}"
+              command: ["sh","-c","python /code/main.py --backend {{ .Values.global.training.backend }} --init-method tcp://worker-0:23456 --world-size {{ .Values.global.training.worldsize }} --rank ${TASKROLE_REPLICA_INDEX}) --arch {{ .Values.global.training.arch }} --epochs {{ .Values.global.training.epochs }} --batch-size {{ .Values.global.training.batchsize }} --learning-rate {{ .Values.global.training.learningrate }}"]
+              securityContext:
+                capabilities:
+                  add: [ "IPC_LOCK" ]
+              resources:
+                limits:
+                  {{ if gt .Values.global.gpu.num 0.0 }}
+                  {{ .Values.global.gpu.name }}: {{ .Values.global.gpu.num }}
+                  {{- end }}
+                  {{- if eq .Values.global.rdma.enable true  }}
+                  {{ .Values.global.rdma.name }}: 1
+                  {{- end }}
+              volumeMounts:
+                - name: sharehosts
+                  mountPath: /etc/hosts
+                  readOnly: true
+          serviceAccountName: poddiscovery
+          initContainers:
+            - name: poddiscovery
+              image: "{{ .Values.image.poddiscovery.name }}:{{ .Values.image.poddiscovery.tag }}"
+              command: ["sh","-c","/app/poddiscovery"]
+              volumeMounts:
+                - name: sharehosts
+                  mountPath: /etc/hosts
+                  readOnly: false
+                - name: sharetemphosts
+                  mountPath: /etc/hosts_json.json
+                  readOnly: false
+          volumes:
+            - name: sharehosts
+              hostPath:
+                path: "{{ .Values.shared.path }}/hosts"
+                type: FileOrCreate
+            - name: sharetemphosts
+              hostPath:
+                path: "{{ .Values.shared.path }}/hosts_json.json"
+                type: FileOrCreate

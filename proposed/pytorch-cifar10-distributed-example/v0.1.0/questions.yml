@@ -1,0 +1,152 @@
+categories:
+  - machine learning
+labels:
+  io.rancher.certified: experimental
+questions:
+# training configuration
+- variable: global.training.arch
+  default: "resnet18"
+  description: "Optional Models Name"
+  type: enum
+  options:
+    - "alexnet"
+    - "densenet121"
+    - "googlenet"
+    - "inception_v3"
+    - "mnasnet0_5"
+    - "mnasnet1_3"
+    - "mobilenet_v2"
+    - "resnet18"
+    - "resnet101"
+    - "resnet50"
+    - "resnext152"
+    - "resnext50"
+    - "shufflenet_v2_x1_0"
+    - "squeezenet1_0"
+    - "vgg11"
+    - "vgg19"
+  label: Optional Models Name
+  group: "training"
+- variable: global.training.batchsize
+  default: 128
+  description: "Training Batch Size"
+  type: int
+  label: Batch Size
+  group: "training"
+- variable: global.training.learningrate
+  default: 0.001
+  description: "Training Learning Rate"
+  type: string
+  label: Learning Rate
+  group: "training"
+- variable: global.training.worldsize
+  default: 1
+  description: "Training World Size(the num of member)"
+  type: int
+  label: World Size
+  group: "training"
+- variable: global.training.backend
+  default: "nccl"
+  description: "Training Communication Backend"
+  type: enum
+  options:
+    - "nccl"
+    - "gloo"
+  label: Communication Backend
+  group: "training"
+- variable: global.training.epochs
+  default: 20
+  description: "Training Epochs"
+  type: int
+  label: Epochs
+  group: "training"
+- variable: global.training.gpu.enable
+  default: true
+  description: "Training Used cuda"
+  type: boolean
+  label: Use cuda
+  group: "training"
+  show_subquestion_if: true
+  subquestions:
+    - variable: global.gpu.num
+      default: 1
+      type: int
+      description: "每个任务节点gpu数"
+      label: Every Task Num Of GPU
+    - variable: global.gpu.name
+      default: "nvidia.com/gpu"
+      type: string
+      label: GPU Resource Name
+- variable: rdma.enable
+  default: true
+  description: "Training Used RDMA(need infiniband and set backend=nccl)"
+  type: boolean
+  label: Use RDMA
+  group: "training"
+  show_subquestion_if: true
+  subquestions:
+    - variable: rdma.name
+      default: "rdma/hca"
+      type: string
+      label: RDMA Resource Name
+
+# crd configuration
+- variable: crd
+  default: "volcano"
+  description: "Choose CRD"
+  label: Choose CRD
+  type: enum
+  options:
+    - "volcano"
+    - "taskset"
+    - "framework"
+    - "pytorch-operator"
+  group: "crd"
+# taskset configurationg
+- variable: taskset.enabled
+  default: true
+  type: boolean
+  group: "crd"
+  subquestions:
+    - variable: takset.image.job.name
+      default: "registry.cn-shanghai.aliyuncs.com/ruanxingbaozi/pytorch"
+      type: string
+      label: Takset Job Image Name
+    - variable: takset.image.job.tag
+      default: "20.06-py3"
+      type: string
+      label: Takset Job Image Name
+    - variable: takset.image.poddiscovery.name
+      default: openi/poddiscovery
+      type: string
+      label: Takset Poddiscovery Image Name
+    - variable: takset.image.poddiscovery.tag
+      default: "v1.0.1"
+      type: string
+      label: Takset Poddiscovery Image Name
+    - variable: takset.podgroup.name
+      default: "pg1"
+      type: string
+      label: Takset Podgroup Name
+    - variable: takset.podgroup.minMember
+      default: 1
+      type: int
+      description: "Takset Podgroup Min Member(分布式任务运行所需的最小启动数量<=总任务数)"
+      label: Takset Podgroup Min Member
+    - variable: takset.schedulername
+      default: "kube-batch"
+      type: enum
+      options:
+        - "default"
+        - "kube-batch"
+        - "volcano"
+      label: Takset Scheduler Name
+    - variable: takset.worker.replicas
+      default: 1
+      type: int
+      label: Takset worker Replicas
+    - variable: takset.shared.path
+      default: "/nfs/expoter"
+      type: string
+      description: "Taskset Poddiscovery Need A Shared Directory"
+      label: Takset Shared Path
