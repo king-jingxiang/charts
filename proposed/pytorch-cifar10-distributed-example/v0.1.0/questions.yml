@@ -60,7 +60,7 @@ questions:
   type: int
   label: Epochs
   group: "training"
-- variable: global.training.gpu.enable
+- variable: global.gpu.enable
   default: true
   description: "Training Used cuda"
   type: boolean
@@ -77,7 +77,7 @@ questions:
       default: "nvidia.com/gpu"
       type: string
       label: GPU Resource Name
-- variable: rdma.enable
+- variable: global.rdma.enable
   default: true
   description: "Training Used RDMA(need infiniband and set backend=nccl)"
   type: boolean
@@ -85,7 +85,7 @@ questions:
   group: "training"
   show_subquestion_if: true
   subquestions:
-    - variable: rdma.name
+    - variable: global.rdma.name
       default: "rdma/hca"
       type: string
       label: RDMA Resource Name

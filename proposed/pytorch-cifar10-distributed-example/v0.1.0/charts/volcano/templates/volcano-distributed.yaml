@@ -36,10 +36,10 @@ spec:
                   name: job-port
               resources:
                 limits:
-                  {{ if gt .Values.global.gpu.num 0.0 }}
+                    {{- if eq .Values.global.gpu.enable true -}}
                     {{ .Values.global.gpu.name }}: {{ .Values.global.gpu.num }}
-                    {{- end }}
-                    {{- if eq .Values.global.rdma.enable true  }}
+                    {{- end -}}
+                    {{- if eq .Values.global.rdma.enable true -}}
                     {{ .Values.global.rdma.name }}: 1
-                    {{- end }}
+                    {{- end -}}
           restartPolicy: OnFailure
