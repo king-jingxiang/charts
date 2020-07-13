@@ -23,9 +23,7 @@ spec:
             - command:
                 - sh
                 - -c
-                - |
-                  WORKER_HOST=`cat /etc/volcano/worker.host | sed 's/$/&:23456/g' | tr "\n" ","`;
-                  python /code/main.py --backend {{ .Values.global.training.backend }} --init-method tcp://${WORKER_HOST} --world-size {{ .Values.global.training.worldsize }} --rank ${VK_TASK_INDEX} --arch {{ .Values.global.training.arch }} --epochs {{ .Values.global.training.epochs }} --batch-size {{ .Values.global.training.batchsize }} --learning-rate {{ .Values.global.training.learningrate }}
+                - python /code/main.py --backend {{ .Values.global.training.backend }} --init-method tcp://pytorch-ringallreduce-worker-0:23456 --world-size {{ .Values.global.training.worldsize }} --rank ${VK_TASK_INDEX} --arch {{ .Values.global.training.arch }} --epochs {{ .Values.global.training.epochs }} --batch-size {{ .Values.global.training.batchsize }} --learning-rate {{ .Values.global.training.learningrate }}
               image: "{{ .Values.image.job.name }}:{{ .Values.image.job.tag }}"
               name: worker
               securityContext:
