@@ -15,7 +15,7 @@ spec:
     - event: PodEvicted
       action: RestartJob
   tasks:
-    - replicas: {{ .Values.replicas }}
+    - replicas: {{ .Values.worker.replicas }}
       name: worker
       template:
         spec:
