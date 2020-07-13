@@ -60,7 +60,7 @@ questions:
   type: int
   label: Epochs
   group: "training"
-- variable: global.gpu.enable
+- variable: global.gpu.enabled
   default: true
   description: "Training Used cuda"
   type: boolean
@@ -77,7 +77,7 @@ questions:
       default: "nvidia.com/gpu"
       type: string
       label: GPU Resource Name
-- variable: global.rdma.enable
+- variable: global.rdma.enabled
   default: true
   description: "Training Used RDMA(need infiniband and set backend=nccl)"
   type: boolean
@@ -113,32 +113,38 @@ questions:
   type: string
   label: Takset Job Image Name
   show_if: "crd=taskset"
+  group: "taskset"
 - variable: takset.image.job.tag
   default: "20.06-py3"
   type: string
   label: Takset Job Image Name
   show_if: "crd=taskset"
+  group: "taskset"
 - variable: takset.image.poddiscovery.name
   default: openi/poddiscovery
   type: string
   label: Takset Poddiscovery Image Name
   show_if: "crd=taskset"
+  group: "taskset"
 - variable: takset.image.poddiscovery.tag
   default: "v1.0.1"
   type: string
   label: Takset Poddiscovery Image Name
   show_if: "crd=taskset"
+  group: "taskset"
 - variable: takset.podgroup.name
   default: "pg1"
   type: string
   label: Takset Podgroup Name
   show_if: "crd=taskset"
+  group: "taskset"
 - variable: takset.podgroup.minMember
   default: 1
   type: int
   description: "Takset Podgroup Min Member(分布式任务运行所需的最小启动数量<=总任务数)"
   label: Takset Podgroup Min Member
   show_if: "crd=taskset"
+  group: "taskset"
 - variable: takset.schedulername
   default: "kube-batch"
   type: enum
@@ -148,16 +154,19 @@ questions:
     - "volcano"
   label: Takset Scheduler Name
   show_if: "crd=taskset"
+  group: "taskset"
 - variable: takset.worker.replicas
   default: 1
   type: int
   label: Takset worker Replicas
   show_if: "crd=taskset"
+  group: "taskset"
 - variable: takset.shared.path
   default: "/nfs/expoter"
   type: string
   description: "Taskset Poddiscovery Need A Shared Directory"
   label: Takset Shared Path
+  group: "taskset"
   show_if: "crd=taskset"
 
 # volcano configuration
@@ -170,24 +179,29 @@ questions:
   default: 1
   type: int
   label: Volcano minMember
+  group: "volcano"
   show_if: "crd=volcano"
 - variable: volcano.schedulerName
   default: "volcano"
   type: string
   label: Volcano Scheduler Name
+  group: "volcano"
   show_if: "crd=volcano"
 - variable: volcano.worker.replicas
   default: 1
   type: int
   label: Volcano worker Replicas
+  group: "volcano"
   show_if: "crd=volcano"
 - variable: volcano.image.job.name
   default: "registry.cn-shanghai.aliyuncs.com/ruanxingbaozi/pytorch"
   type: string
   label: Volcano Job Image Name
+  group: "volcano"
   show_if: "crd=volcano"
 - variable: volcano.image.job.tag
   default: "20.06-py3"
   type: string
   label: Volcano Job Image Name
+  group: "volcano"
   show_if: "crd=volcano"

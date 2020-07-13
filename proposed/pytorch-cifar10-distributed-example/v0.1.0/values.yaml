@@ -3,11 +3,11 @@
 # Declare variables to be passed into your templates.
 global:
   gpu:
-    enable: true
+    enabled: true
     name: nvidia.com/gpu
     num: 1
   rdma:
-    enable: true
+    enabled: true
     name: rdma/hca
   training:
     arch: resnet18
