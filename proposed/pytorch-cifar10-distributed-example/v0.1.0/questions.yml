@@ -103,60 +103,59 @@ questions:
     - "pytorch-operator"
   group: "crd"
 # taskset configurationg
-  subquestions:
-    - variable: taskset.enabled
-      default: true
-      type: boolean
-      group: "crd"
-      show_if: "crd=taskset"
-    - variable: takset.image.job.name
-      default: "registry.cn-shanghai.aliyuncs.com/ruanxingbaozi/pytorch"
-      type: string
-      label: Takset Job Image Name
-      show_if: "crd=taskset"
-    - variable: takset.image.job.tag
-      default: "20.06-py3"
-      type: string
-      label: Takset Job Image Name
-      show_if: "crd=taskset"
-    - variable: takset.image.poddiscovery.name
-      default: openi/poddiscovery
-      type: string
-      label: Takset Poddiscovery Image Name
-      show_if: "crd=taskset"
-    - variable: takset.image.poddiscovery.tag
-      default: "v1.0.1"
-      type: string
-      label: Takset Poddiscovery Image Name
-      show_if: "crd=taskset"
-    - variable: takset.podgroup.name
-      default: "pg1"
-      type: string
-      label: Takset Podgroup Name
-      show_if: "crd=taskset"
-    - variable: takset.podgroup.minMember
-      default: 1
-      type: int
-      description: "Takset Podgroup Min Member(分布式任务运行所需的最小启动数量<=总任务数)"
-      label: Takset Podgroup Min Member
-      show_if: "crd=taskset"
-    - variable: takset.schedulername
-      default: "kube-batch"
-      type: enum
-      options:
-        - "default"
-        - "kube-batch"
-        - "volcano"
-      label: Takset Scheduler Name
-      show_if: "crd=taskset"
-    - variable: takset.worker.replicas
-      default: 1
-      type: int
-      label: Takset worker Replicas
-      show_if: "crd=taskset"
-    - variable: takset.shared.path
-      default: "/nfs/expoter"
-      type: string
-      description: "Taskset Poddiscovery Need A Shared Directory"
-      label: Takset Shared Path
-      show_if: "crd=taskset"
+- variable: taskset.enabled
+  default: true
+  type: boolean
+  group: "crd"
+  show_if: "crd=taskset"
+- variable: takset.image.job.name
+  default: "registry.cn-shanghai.aliyuncs.com/ruanxingbaozi/pytorch"
+  type: string
+  label: Takset Job Image Name
+  show_if: "crd=taskset"
+- variable: takset.image.job.tag
+  default: "20.06-py3"
+  type: string
+  label: Takset Job Image Name
+  show_if: "crd=taskset"
+- variable: takset.image.poddiscovery.name
+  default: openi/poddiscovery
+  type: string
+  label: Takset Poddiscovery Image Name
+  show_if: "crd=taskset"
+- variable: takset.image.poddiscovery.tag
+  default: "v1.0.1"
+  type: string
+  label: Takset Poddiscovery Image Name
+  show_if: "crd=taskset"
+- variable: takset.podgroup.name
+  default: "pg1"
+  type: string
+  label: Takset Podgroup Name
+  show_if: "crd=taskset"
+- variable: takset.podgroup.minMember
+  default: 1
+  type: int
+  description: "Takset Podgroup Min Member(分布式任务运行所需的最小启动数量<=总任务数)"
+  label: Takset Podgroup Min Member
+  show_if: "crd=taskset"
+- variable: takset.schedulername
+  default: "kube-batch"
+  type: enum
+  options:
+    - "default"
+    - "kube-batch"
+    - "volcano"
+  label: Takset Scheduler Name
+  show_if: "crd=taskset"
+- variable: takset.worker.replicas
+  default: 1
+  type: int
+  label: Takset worker Replicas
+  show_if: "crd=taskset"
+- variable: takset.shared.path
+  default: "/nfs/expoter"
+  type: string
+  description: "Taskset Poddiscovery Need A Shared Directory"
+  label: Takset Shared Path
+  show_if: "crd=taskset"
