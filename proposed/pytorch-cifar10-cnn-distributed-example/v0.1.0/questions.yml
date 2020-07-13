@@ -40,7 +40,7 @@ questions:
   label: Learning Rate
   group: "training"
 - variable: global.training.worldsize
-  default: 2
+  default: 1
   description: "Training World Size(the num of member)"
   type: int
   label: World Size
@@ -107,7 +107,7 @@ questions:
   default: true
   type: boolean
   group: "crd"
-  show_subquestion_if: true
+  show_subquestion_if: "crd=taskset"
   subquestions:
     - variable: takset.image.job.name
       default: "registry.cn-shanghai.aliyuncs.com/ruanxingbaozi/pytorch"
