@@ -15,4 +15,4 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: poddiscovery
-  namespace: default
+  namespace: {{ .Release.Namespace }}

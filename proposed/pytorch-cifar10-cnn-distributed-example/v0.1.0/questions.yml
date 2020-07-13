@@ -105,10 +105,7 @@ questions:
 # taskset configurationg
 - variable: taskset.enabled
   default: true
-  description: "Taskset enabled"
   type: boolean
-  label: Taskset enabled
-  show_if: "crd=taskset"
   group: "crd"
   show_subquestion_if: true
   subquestions:
