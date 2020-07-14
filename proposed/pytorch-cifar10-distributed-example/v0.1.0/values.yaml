@@ -47,7 +47,7 @@ framework:
       tag: 20.06-py3
     frameworkbarrier:
       name: frameworkcontroller/frameworkbarrier
-      tag: latest
+      tag: v0.6.0
 
 volcano:
   enabled: false
