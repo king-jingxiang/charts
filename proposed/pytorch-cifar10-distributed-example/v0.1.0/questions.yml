@@ -108,64 +108,65 @@ questions:
   type: boolean
   group: "crd"
   show_if: "crd=taskset"
-- variable: takset.image.job.name
+- variable: taskset.image.job.name
   default: "registry.cn-shanghai.aliyuncs.com/ruanxingbaozi/pytorch"
   type: string
-  label: Takset Job Image Name
+  label: taskset Job Image Name
   show_if: "crd=taskset"
   group: "taskset"
-- variable: takset.image.job.tag
+- variable: taskset.image.job.tag
   default: "20.06-py3"
   type: string
-  label: Takset Job Image Name
+  label: taskset Job Image Name
   show_if: "crd=taskset"
   group: "taskset"
-- variable: takset.image.poddiscovery.name
+- variable: taskset.image.poddiscovery.name
   default: openi/poddiscovery
   type: string
-  label: Takset Poddiscovery Image Name
+  label: taskset Poddiscovery Image Name
   show_if: "crd=taskset"
   group: "taskset"
-- variable: takset.image.poddiscovery.tag
+- variable: taskset.image.poddiscovery.tag
   default: "v1.0.1"
   type: string
-  label: Takset Poddiscovery Image Name
+  label: taskset Poddiscovery Image Name
   show_if: "crd=taskset"
   group: "taskset"
-- variable: takset.podgroup.name
+- variable: taskset.podgroup.name
   default: "pg1"
   type: string
-  label: Takset Podgroup Name
+  label: taskset Podgroup Name
   show_if: "crd=taskset"
   group: "taskset"
-- variable: takset.podgroup.minMember
+- variable: taskset.podgroup.minMember
   default: 1
   type: int
-  description: "Takset Podgroup Min Member(分布式任务运行所需的最小启动数量<=总任务数)"
-  label: Takset Podgroup Min Member
+  description: "Taskset Podgroup Min Member(分布式任务运行所需的最小启动数量<=总任务数)"
+  label: taskset Podgroup Min Member
   show_if: "crd=taskset"
   group: "taskset"
-- variable: takset.schedulername
+- variable: taskset.schedulername
   default: "kube-batch"
   type: enum
   options:
     - "default"
     - "kube-batch"
     - "volcano"
-  label: Takset Scheduler Name
+  label: taskset Scheduler Name
   show_if: "crd=taskset"
   group: "taskset"
-- variable: takset.worker.replicas
+- variable: taskset.worker.replicas
   default: 1
   type: int
-  label: Takset worker Replicas
+  label: taskset worker Replicas
   show_if: "crd=taskset"
   group: "taskset"
-- variable: takset.shared.path
+  description: "must set value of world_size"
+- variable: taskset.shared.path
   default: "/nfs/expoter"
   type: string
   description: "Taskset Poddiscovery Need A Shared Directory"
-  label: Takset Shared Path
+  label: taskset Shared Path
   group: "taskset"
   show_if: "crd=taskset"
 
@@ -194,6 +195,7 @@ questions:
   label: Volcano worker Replicas
   group: "volcano"
   show_if: "crd=volcano"
+  description: "must set value of world_size"
 - variable: volcano.image.job.name
   default: "registry.cn-shanghai.aliyuncs.com/ruanxingbaozi/pytorch"
   type: string
@@ -225,6 +227,7 @@ questions:
   label: framework worker Replicas
   group: "framework"
   show_if: "crd=framework"
+  description: "must set (world_size-1)"
 - variable: framework.image.job.name
   default: "registry.cn-shanghai.aliyuncs.com/ruanxingbaozi/pytorch"
   type: string
