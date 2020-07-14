@@ -213,12 +213,6 @@ questions:
   label: Enable framework
   group: "crd"
   show_if: "crd=framework"
-- variable: framework.minMember
-  default: 1
-  type: int
-  label: framework minMember
-  group: "framework"
-  show_if: "crd=framework"
 - variable: framework.schedulerName
   default: "default"
   type: string
@@ -250,7 +244,7 @@ questions:
   group: "framework"
   show_if: "crd=framework"
 - variable: framework.image.frameworkbarrier.tag
-  default: "latest"
+  default: "v0.6.0"
   type: string
   label: framework frameworkbarrier Image Name
   group: "framework"
