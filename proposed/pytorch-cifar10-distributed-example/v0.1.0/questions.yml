@@ -206,3 +206,52 @@ questions:
   label: Volcano Job Image Name
   group: "volcano"
   show_if: "crd=volcano"
+# framework configuration
+- variable: framework.enabled
+  default: true
+  type: boolean
+  label: Enable framework
+  group: "crd"
+  show_if: "crd=framework"
+- variable: framework.minMember
+  default: 1
+  type: int
+  label: framework minMember
+  group: "framework"
+  show_if: "crd=framework"
+- variable: framework.schedulerName
+  default: "default"
+  type: string
+  label: framework Scheduler Name
+  group: "framework"
+  show_if: "crd=framework"
+- variable: framework.worker.replicas
+  default: 1
+  type: int
+  label: framework worker Replicas
+  group: "framework"
+  show_if: "crd=framework"
+- variable: framework.image.job.name
+  default: "registry.cn-shanghai.aliyuncs.com/ruanxingbaozi/pytorch"
+  type: string
+  label: framework Job Image Name
+  group: "framework"
+  show_if: "crd=framework"
+- variable: framework.image.job.tag
+  default: "20.06-py3"
+  type: string
+  label: framework Job Image Name
+  group: "framework"
+  show_if: "crd=framework"
+- variable: framework.image.frameworkbarrier.name
+  default: "frameworkcontroller/frameworkbarrier"
+  type: string
+  label: framework frameworkbarrier Image Name
+  group: "framework"
+  show_if: "crd=framework"
+- variable: framework.image.frameworkbarrier.tag
+  default: "latest"
+  type: string
+  label: framework frameworkbarrier Image Name
+  group: "framework"
+  show_if: "crd=framework"

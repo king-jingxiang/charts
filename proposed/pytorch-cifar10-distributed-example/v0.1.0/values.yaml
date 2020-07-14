@@ -38,6 +38,16 @@ taskset:
 
 framework:
   enabled: false
+  schedulername: default
+  worker:
+    replicas: 1
+  image:
+    job:
+      name: registry.cn-shanghai.aliyuncs.com/ruanxingbaozi/pytorch
+      tag: 20.06-py3
+    frameworkbarrier:
+      name: frameworkcontroller/frameworkbarrier
+      tag: latest
 
 volcano:
   enabled: true
