@@ -33,6 +33,7 @@ spec:
                   add: [ "IPC_LOCK" ]
               resources:
                 limits:
+                  cpu: 8000m
                   {{- if eq .Values.global.gpu.enabled true }}
                   {{ .Values.global.gpu.name }}: {{ .Values.global.gpu.num }}
                   {{- end }}
