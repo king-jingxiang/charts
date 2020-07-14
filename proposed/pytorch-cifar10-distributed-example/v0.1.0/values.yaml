@@ -50,7 +50,7 @@ framework:
       tag: latest
 
 volcano:
-  enabled: true
+  enabled: false
   minMember: 2
   schedulername: volcano
   worker:
