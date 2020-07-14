@@ -100,7 +100,6 @@ questions:
     - "volcano"
     - "taskset"
     - "framework"
-    - "pytorch-operator"
   group: "crd"
 # taskset configurationg
 - variable: taskset.enabled

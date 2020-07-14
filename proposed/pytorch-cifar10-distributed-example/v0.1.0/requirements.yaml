@@ -8,6 +8,3 @@ dependencies:
   - name: volcano
     version: 0.1.0
     condition: volcano.enabled
-  - name: pytorch-operator
-    version: 0.1.0
-    condition: pytorch-operator.enabled
