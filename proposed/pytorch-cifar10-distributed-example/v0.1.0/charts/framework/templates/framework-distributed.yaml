@@ -33,15 +33,15 @@ spec:
                   capabilities:
                     add: [ "IPC_LOCK" ]
                 ports:
-                  - containerPort: 23456
+                  containerPort: 23456
                 resources:
-                limits:
-                    {{- if eq .Values.global.gpu.enabled true -}}
+                  limits:
+                    {{- if eq .Values.global.gpu.enabled true }}
                     {{ .Values.global.gpu.name }}: {{ .Values.global.gpu.num }}
-                    {{- end -}}
-                    {{- if eq .Values.global.rdma.enabled true -}}
+                    {{- end }}
+                    {{- if eq .Values.global.rdma.enabled true }}
                     {{ .Values.global.rdma.name }}: 1
-                    {{- end -}}
+                    {{- end }}
                 volumeMounts:
                   - name: frameworkbarrier-volume
                     mountPath: /mnt/frameworkbarrier

@@ -19,6 +19,7 @@ spec:
       name: worker
       template:
         spec:
+          restartPolicy: OnFailure
           containers:
             - command:
                 - sh
@@ -34,10 +35,9 @@ spec:
                   name: job-port
               resources:
                 limits:
-                    {{- if eq .Values.global.gpu.enabled true -}}
-                    {{ .Values.global.gpu.name }}: {{ .Values.global.gpu.num }}
-                    {{- end -}}
-                    {{- if eq .Values.global.rdma.enabled true -}}
-                    {{ .Values.global.rdma.name }}: 1
-                    {{- end -}}
-          restartPolicy: OnFailure
+                  {{- if eq .Values.global.gpu.enabled true }}
+                  {{ .Values.global.gpu.name }}: {{ .Values.global.gpu.num }}
+                  {{- end }}
+                  {{- if eq .Values.global.rdma.enabled true }}
+                  {{ .Values.global.rdma.name }}: 1
+                  {{- end }}
