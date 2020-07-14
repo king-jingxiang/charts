@@ -36,12 +36,12 @@ spec:
                   - containerPort: 23456
                 resources:
                 limits:
-                  {{- if eq .Values.global.gpu.enabled true -}}
-                  {{ .Values.global.gpu.name }}: {{ .Values.global.gpu.num }}
-                  {{- end -}}
-                  {{- if eq .Values.global.rdma.enabled true -}}
-                  {{ .Values.global.rdma.name }}: 1
-                  {{- end -}}
+                    {{- if eq .Values.global.gpu.enabled true -}}
+                    {{ .Values.global.gpu.name }}: {{ .Values.global.gpu.num }}
+                    {{- end -}}
+                    {{- if eq .Values.global.rdma.enabled true -}}
+                    {{ .Values.global.rdma.name }}: 1
+                    {{- end -}}
                 volumeMounts:
                   - name: frameworkbarrier-volume
                     mountPath: /mnt/frameworkbarrier
