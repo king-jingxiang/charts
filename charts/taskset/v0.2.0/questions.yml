@@ -17,12 +17,12 @@ questions:
   group: "Container Images"
   subquestions:
     - variable: image.repository
-      default: "openi/tasksetcontroller"
+      default: "registry.cn-shanghai.aliyuncs.com/ruanxingbaozi/tasksetcontroller"
       description: "Taskset image name"
       type: string
       label: Taskset Image Name
     - variable: image.tag
-      default: "v0.0.2"
+      default: "v2.5.0"
       description: "Taskset image tag"
       type: string
       label: Taskset Image Tag

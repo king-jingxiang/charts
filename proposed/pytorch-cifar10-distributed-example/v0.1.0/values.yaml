@@ -59,6 +59,3 @@ volcano:
     job:
       name: registry.cn-shanghai.aliyuncs.com/ruanxingbaozi/pytorch
       tag: 20.06-py3
-
-pytorch-operator:
-  enabled: false
