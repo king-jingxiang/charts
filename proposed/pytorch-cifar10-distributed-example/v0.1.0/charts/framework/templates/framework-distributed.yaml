@@ -9,6 +9,51 @@ spec:
     fancyRetryPolicy: true
     maxRetryCount: 2
   taskRoles:
+    - name: master
+      taskNumber: 1
+      frameworkAttemptCompletionPolicy:
+        minFailedTaskCount: 1
+        minSucceededTaskCount: -1
+      task:
+        retryPolicy:
+          fancyRetryPolicy: false
+          maxRetryCount: 0
+        pod:
+          spec:
+            restartPolicy: Never
+            hostNetwork: false
+            containers:
+              - name: worker
+                image: "{{ .Values.image.job.name }}:{{ .Values.image.job.tag }}"
+                command: [
+                  "sh", "-c",
+                  "FB_MASTER_PORT=23456 . /mnt/frameworkbarrier/injector.sh &&
+                  python /code/main.py --backend {{ .Values.global.training.backend }} --init-method tcp://${FB_WORKER_ADDRESSES} --world-size {{ .Values.global.training.worldsize }} --rank ${FC_TASK_INDEX} --arch {{ .Values.global.training.arch }} --epochs {{ .Values.global.training.epochs }} --batch-size {{ .Values.global.training.batchsize }} --learning-rate {{ .Values.global.training.learningrate }}"]
+                securityContext:
+                  capabilities:
+                    add: [ "IPC_LOCK" ]
+                resources:
+                  limits:
+                    cpu: 8000m
+                    {{- if eq .Values.global.gpu.enabled true }}
+                    {{ .Values.global.gpu.name }}: {{ .Values.global.gpu.num }}
+                    {{- end }}
+                    {{- if eq .Values.global.rdma.enabled true }}
+                    {{ .Values.global.rdma.name }}: 1
+                    {{- end }}
+                volumeMounts:
+                  - name: frameworkbarrier-volume
+                    mountPath: /mnt/frameworkbarrier
+            serviceAccountName: frameworkbarrier
+            initContainers:
+              - name: frameworkbarrier
+                image: "{{ .Values.image.frameworkbarrier.name }}:{{ .Values.image.frameworkbarrier.tag }}"
+                volumeMounts:
+                  - name: frameworkbarrier-volume
+                    mountPath: /mnt/frameworkbarrier
+            volumes:
+              - name: frameworkbarrier-volume
+                emptyDir: {}
     - name: worker
       taskNumber: {{ .Values.worker.replicas }}
       frameworkAttemptCompletionPolicy:
@@ -27,8 +72,8 @@ spec:
                 image: "{{ .Values.image.job.name }}:{{ .Values.image.job.tag }}"
                 command: [
                   "sh", "-c",
-                  "FB_PS_PORT=23456 . /mnt/frameworkbarrier/injector.sh &&
-                  python /code/main.py --backend {{ .Values.global.training.backend }} --init-method tcp://${FB_PS_ADDRESSES}:23456 --world-size {{ .Values.global.training.worldsize }} --rank ${VK_TASK_INDEX} --arch {{ .Values.global.training.arch }} --epochs {{ .Values.global.training.epochs }} --batch-size {{ .Values.global.training.batchsize }} --learning-rate {{ .Values.global.training.learningrate }}"]
+                  "FB_MASTER_PORT=23456 . /mnt/frameworkbarrier/injector.sh &&
+                  python /code/main.py --backend {{ .Values.global.training.backend }} --init-method tcp://${FB_WORKER_ADDRESSES} --world-size {{ .Values.global.training.worldsize }} --rank $(expr 1 +  ${FC_TASK_INDEX}) --arch {{ .Values.global.training.arch }} --epochs {{ .Values.global.training.epochs }} --batch-size {{ .Values.global.training.batchsize }} --learning-rate {{ .Values.global.training.learningrate }}"]
                 securityContext:
                   capabilities:
                     add: [ "IPC_LOCK" ]
