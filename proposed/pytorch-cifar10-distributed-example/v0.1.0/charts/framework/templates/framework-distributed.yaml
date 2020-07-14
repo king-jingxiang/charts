@@ -28,7 +28,7 @@ spec:
                 command: [
                   "sh", "-c",
                   "FB_MASTER_PORT=23456 . /mnt/frameworkbarrier/injector.sh &&
-                  python /code/main.py --backend {{ .Values.global.training.backend }} --init-method tcp://${FB_WORKER_ADDRESSES} --world-size {{ .Values.global.training.worldsize }} --rank ${FC_TASK_INDEX} --arch {{ .Values.global.training.arch }} --epochs {{ .Values.global.training.epochs }} --batch-size {{ .Values.global.training.batchsize }} --learning-rate {{ .Values.global.training.learningrate }}"]
+                  python /code/main.py --backend {{ .Values.global.training.backend }} --init-method tcp://${FB_MASTER_ADDRESSES} --world-size {{ .Values.global.training.worldsize }} --rank ${FC_TASK_INDEX} --arch {{ .Values.global.training.arch }} --epochs {{ .Values.global.training.epochs }} --batch-size {{ .Values.global.training.batchsize }} --learning-rate {{ .Values.global.training.learningrate }}"]
                 securityContext:
                   capabilities:
                     add: [ "IPC_LOCK" ]
@@ -73,7 +73,7 @@ spec:
                 command: [
                   "sh", "-c",
                   "FB_MASTER_PORT=23456 . /mnt/frameworkbarrier/injector.sh &&
-                  python /code/main.py --backend {{ .Values.global.training.backend }} --init-method tcp://${FB_WORKER_ADDRESSES} --world-size {{ .Values.global.training.worldsize }} --rank $(expr 1 +  ${FC_TASK_INDEX}) --arch {{ .Values.global.training.arch }} --epochs {{ .Values.global.training.epochs }} --batch-size {{ .Values.global.training.batchsize }} --learning-rate {{ .Values.global.training.learningrate }}"]
+                  python /code/main.py --backend {{ .Values.global.training.backend }} --init-method tcp://${FB_MASTER_ADDRESSES} --world-size {{ .Values.global.training.worldsize }} --rank $(expr 1 +  ${FC_TASK_INDEX}) --arch {{ .Values.global.training.arch }} --epochs {{ .Values.global.training.epochs }} --batch-size {{ .Values.global.training.batchsize }} --learning-rate {{ .Values.global.training.learningrate }}"]
                 securityContext:
                   capabilities:
                     add: [ "IPC_LOCK" ]
