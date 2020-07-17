@@ -27,7 +27,7 @@ spec:
           containers:
             - name: worker
               image: "{{ .Values.image.job.name }}:{{ .Values.image.job.tag }}"
-              command: ["sh","-c","python /code/main.py --backend {{ .Values.global.training.backend }} --init-method tcp://worker-0:23456 --world-size {{ .Values.global.training.worldsize }} --rank ${TASKROLE_REPLICA_INDEX}) --arch {{ .Values.global.training.arch }} --epochs {{ .Values.global.training.epochs }} --batch-size {{ .Values.global.training.batchsize }} --learning-rate {{ .Values.global.training.learningrate }}"]
+              command: ["sh","-c","python /code/main.py --backend {{ .Values.global.training.backend }} --init-method tcp://worker-0:23456 --world-size {{ .Values.global.training.worldsize }} --rank ${TASKROLE_REPLICA_INDEX} --arch {{ .Values.global.training.arch }} --epochs {{ .Values.global.training.epochs }} --batch-size {{ .Values.global.training.batchsize }} --learning-rate {{ .Values.global.training.learningrate }}"]
               securityContext:
                 capabilities:
                   add: [ "IPC_LOCK" ]
