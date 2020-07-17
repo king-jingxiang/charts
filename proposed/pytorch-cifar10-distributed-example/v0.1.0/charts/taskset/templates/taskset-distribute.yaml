@@ -60,8 +60,10 @@ spec:
             - name: sharehosts
               hostPath:
                 path: "{{ .Values.shared.path }}/hosts"
-                type: FileOrCreate
+#                type: FileOrCreate
+                type: ""
             - name: sharetemphosts
               hostPath:
                 path: "{{ .Values.shared.path }}/hosts_json.json"
-                type: FileOrCreate
+#                type: FileOrCreate
+                type: ""
