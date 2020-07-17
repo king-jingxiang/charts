@@ -1,0 +1,9 @@
+apiVersion: v1alpha1
+description: The batch scheduler of Kubernetes
+name: kube-batch
+version: 0.5
+appVersion: 0.5
+home: https://github.com/kubernetes-sigs/kube-batch
+icon: file://../k8slogo.png
+sources:
+  - https://github.com/kubernetes-sigs/kube-batch

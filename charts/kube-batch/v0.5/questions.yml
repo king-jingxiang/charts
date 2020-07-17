@@ -1,0 +1,40 @@
+categories:
+  - ai platform
+questions:
+# kube batch configuration
+- variable: defaultImage
+  default: true
+  description: "Use default Docker image"
+  label: Use Default Image
+  type: boolean
+  show_subquestion_if: false
+  group: "Container Images"
+  subquestions:
+    - variable: image.repository
+      default: "kubesigs"
+      description: "kube-batch image name"
+      type: string
+      label: kube-batch Image Repository
+    - variable: image.tag
+      default: "x86_64"
+      description: "kube-batch image tag"
+      type: string
+      label: kube-batch Image Tag
+    - variable: image.pullPolicy
+      default: "IfNotPresent"
+      description: "kube-batch image PullPolicy"
+      type: enum
+      label: kube-batch image PullPolicy
+      options:
+        - "IfNotPresent"
+        - "Always"
+- variable: resources.limits.cpu
+  default: "2000m"
+  label: resources.limits.cpu
+  type: string
+  group: "Resource"
+- variable: resources.limits.memory
+  default: "2048Mi"
+  label: resources.limits.memory
+  type: string
+  group: "Resource"
