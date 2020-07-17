@@ -16,7 +16,7 @@ questions:
       type: string
       label: kube-batch Image Repository
     - variable: image.tag
-      default: "x86_64"
+      default: "v0.5"
       description: "kube-batch image tag"
       type: string
       label: kube-batch Image Tag
