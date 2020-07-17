@@ -1,0 +1,9 @@
+image:
+  repository: volcanosh/volcano-device-plugin
+  tag: v1.0.0
+  pullPolicy: IfNotPresent
+
+enableNodeSelector: false
+nodeSelector:
+  key:
+  value:

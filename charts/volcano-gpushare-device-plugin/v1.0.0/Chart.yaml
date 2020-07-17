@@ -1,0 +1,11 @@
+apiVersion: v1
+name: volcano-gpushare-device-plugin
+description: A Helm chart for Kubernetes
+type: application
+version: v1.0.0
+appVersion: v1.0.0
+
+home: https://github.com/volcano-sh/devices
+sources:
+  - https://github.com/volcano-sh/devices
+icon: file://../volcano-logo.png

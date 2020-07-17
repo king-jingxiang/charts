@@ -1,0 +1,49 @@
+categories:
+  - ai platform
+questions:
+# nvidia device plugin configuration
+- variable: defaultImage
+  default: true
+  description: "Use default Docker image"
+  label: Use Default Image
+  type: boolean
+  show_subquestion_if: false
+  group: "Container Images"
+  subquestions:
+    - variable: image.repository
+      default: "volcanosh/volcano-device-plugin"
+      description: "Volcano Nvidia gpushare Device Plugin image name"
+      type: string
+      label: Nvidia Device Plugin Image Name
+    - variable: image.tag
+      default: "v1.0.0"
+      description: "Volcano Nvidia gpushare  Device Plugin image tag"
+      type: string
+      label: Nvidia Device Plugin Image Tag
+    - variable: image.pullPolicy
+      default: "IfNotPresent"
+      description: "Volcano Nvidia gpushare  Device Plugin image PullPolicy"
+      type: enum
+      label: Nvidia Device Plugin image PullPolicy
+      options:
+        - "IfNotPresent"
+        - "Always"
+
+- variable: enableNodeSelector
+  default: false
+  description: "Set Node Label Selector"
+  label: EnableNodeSelector
+  type: boolean
+  show_subquestion_if: true
+  group: "NodelSelectors"
+  subquestions:
+    - variable: nodeSelector.key
+      default: "kubernetes.io/nvidia-gpu"
+      description: "Volcano Nvidia gpushare Node Label"
+      type: string
+      label: Volcano Nvidia gpushare Node Selector key
+    - variable: nodeSelector.value
+      default: "exist"
+      description: "Volcano Nvidia gpushare Node Label Value"
+      type: string
+      label: Volcano Nvidia gpushare Node Selector Value
