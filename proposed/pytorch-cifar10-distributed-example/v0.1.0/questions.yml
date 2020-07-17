@@ -120,13 +120,13 @@ questions:
   show_if: "crd=taskset"
   group: "taskset"
 - variable: taskset.image.poddiscovery.name
-  default: openi/poddiscovery
+  default: ruanxingbaozi/taskset-poddiscovery
   type: string
   label: taskset Poddiscovery Image Name
   show_if: "crd=taskset"
   group: "taskset"
 - variable: taskset.image.poddiscovery.tag
-  default: "v1.0.1"
+  default: "v1.0"
   type: string
   label: taskset Poddiscovery Image Name
   show_if: "crd=taskset"
