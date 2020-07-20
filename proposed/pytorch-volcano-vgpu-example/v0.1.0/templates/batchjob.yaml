@@ -1,16 +1,20 @@
-apiVersion: batch/v1
+apiVersion: batch.volcano.sh/v1alpha1
 kind: Job
 metadata:
   name: {{ .Release.Name }}
   namespace: {{ .Release.Namespace }}
 spec:
-  ttlSecondsAfterFinished: 360
-  template:
-    spec:
-      restartPolicy: Never
-      containers:
-        - name: worker
-          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
-          resources:
-            limits:
-              volcano.sh/gpu-memory: {{ .Values.gpuMem }}
+  minAvailable: 1
+  schedulerName: volcano
+  tasks:
+    - replicas: 1
+      name: worker
+      template:
+        spec:
+          containers:
+            - image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+              name: worker
+              resources:
+                limits:
+                  volcano.sh/gpu-memory: {{ .Values.gpuMem }}
+          restartPolicy: OnFailure
