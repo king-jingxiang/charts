@@ -11,4 +11,5 @@ spec:
         - name: worker
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           resources:
-            volcano.sh/gpu-memory: {{ .Values.gpuMem }}
+            limits:
+              volcano.sh/gpu-memory: {{ .Values.gpuMem }}
