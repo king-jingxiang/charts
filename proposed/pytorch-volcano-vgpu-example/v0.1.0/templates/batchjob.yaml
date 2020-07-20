@@ -6,6 +6,12 @@ metadata:
 spec:
   minAvailable: 1
   schedulerName: volcano
+  plugins:
+    ssh: []
+    svc: []
+  policies:
+    - event: PodEvicted
+      action: RestartJob
   tasks:
     - replicas: 1
       name: worker
