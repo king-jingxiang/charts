@@ -10,6 +10,5 @@ spec:
       containers:
         - name: worker
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
-#          command: ["sh", "-c", "/code/run.sh"]
-      resources:
-        volcano.sh/gpu-memory: {{ .Values.gpuMem }}
+          resources:
+            volcano.sh/gpu-memory: {{ .Values.gpuMem }}
