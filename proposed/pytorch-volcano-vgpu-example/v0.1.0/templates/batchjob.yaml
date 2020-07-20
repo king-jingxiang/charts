@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  ttlSecondsAfterFinished: 360
+  template:
+    spec:
+      containers:
+        - name: worker
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+#          command: ["sh", "-c", "/code/run.sh"]
+      resources:
+        volcano.sh/gpu-memory: {{ .Values.gpuMem }}

@@ -1,0 +1,6 @@
+image:
+  repository: registry.cn-shanghai.aliyuncs.com/ruanxingbaozi/pytorch
+  tag: 1.5.1-cuda10.1-cudnn7-vgpu-example
+  pullPolicy: IfNotPresent
+
+gpuMem: 1024

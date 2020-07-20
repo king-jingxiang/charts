@@ -1,0 +1,36 @@
+categories:
+  - ai platform
+questions:
+# pytorch-volcano-vgpu-example configuration
+- variable: defaultImage
+  default: true
+  description: "Use default Docker image"
+  label: Use Default Image
+  type: boolean
+  show_subquestion_if: false
+  group: "Container Images"
+  subquestions:
+    - variable: image.repository
+      default: "registry.cn-shanghai.aliyuncs.com/ruanxingbaozi/pytorch"
+      description: "Pytorch Volcano vgpu image name"
+      type: string
+      label: Pytorch Volcano vgpu Image Name
+    - variable: image.tag
+      default: "1.5.1-cuda10.1-cudnn7-vgpu-example"
+      description: "Pytorch Volcano vgpu image tag"
+      type: string
+      label: Pytorch Volcano vgpu Image Tag
+    - variable: image.pullPolicy
+      default: "IfNotPresent"
+      description: "Pytorch Volcano vgpu image PullPolicy"
+      type: enum
+      label: Pytorch Volcano vgpu image PullPolicy
+      options:
+        - "IfNotPresent"
+        - "Always"
+- variable: gpuMem
+  default: 1024
+  description: "Set Virtual GPU Memory"
+  label: Virtual GPU Memory
+  type: int
+  group: "resource"
