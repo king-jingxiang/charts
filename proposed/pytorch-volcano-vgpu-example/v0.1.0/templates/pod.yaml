@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  restartPolicy: OnFailure
+  schedulerName: volcano
+  containers:
+    - image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+      name: worker
+      resources:
+        limits:
+          volcano.sh/gpu-memory: {{ .Values.gpuMem }}
