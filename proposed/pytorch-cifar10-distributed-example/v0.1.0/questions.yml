@@ -114,7 +114,7 @@ questions:
   show_if: "crd=taskset"
   group: "taskset"
 - variable: taskset.image.job.tag
-  default: "19.02-py3"
+  default: "20.06-py3"
   type: string
   label: taskset Job Image Name
   show_if: "crd=taskset"
@@ -202,7 +202,7 @@ questions:
   group: "volcano"
   show_if: "crd=volcano"
 - variable: volcano.image.job.tag
-  default: "19.02-py3"
+  default: "20.06-py3"
   type: string
   label: Volcano Job Image Name
   group: "volcano"
@@ -234,7 +234,7 @@ questions:
   group: "framework"
   show_if: "crd=framework"
 - variable: framework.image.job.tag
-  default: "19.02-py3"
+  default: "20.06-py3"
   type: string
   label: framework Job Image Name
   group: "framework"
